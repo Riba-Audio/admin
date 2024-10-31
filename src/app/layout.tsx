@@ -1,6 +1,10 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import { cn } from "@/lib/utils";
+
+import { ThemeProvider } from "@/providers/theme-provider";
+import { ToasterProvider } from "@/providers/toast-provider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -15,8 +19,18 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={inter.className}>{children}</body>
-    </html>
+    <html lang="en" suppressHydrationWarning>
+      <body className={cn(`${inter.className} flex h-[100vh] w-[100vw] bg-secondary`)}>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="dark"
+          enableSystem
+          disableTransitionOnChange
+        >
+          {children}
+          <ToasterProvider />
+      </ThemeProvider>
+    </body>
+    </html >
   );
 }
