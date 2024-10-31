@@ -15,7 +15,7 @@ const DashboardCard: React.FC<DashboardCardProps> = (
 ) => {
 
     return (
-        <Card className="py-3 p-2 flex flex-col gap-1 min-w-[190px] rounded-md">
+        <Card className="py-3 p-2 flex flex-col justify-center gap-1 min-w-[190px] min-h-[100px] rounded-md">
             <div className="flex items-center justify-between">
                 <Heading3 className="text-sm lg:text-sm">{title}</Heading3>
                 {icon}

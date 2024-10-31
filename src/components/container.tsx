@@ -37,7 +37,7 @@ const Container: React.FC<ContainerProps> = ({
                 <div className="flex-1 overflow-auto">
                     {children}
                 </div>
-                <div className="py-2 flex justify-center gap-2 items-center">
+                <div className="py-1 flex justify-center gap-2 items-center">
                     <Copyright size={18} />
                     <Heading4 className="text-sm lg:text-md">{process.env.NEXT_PUBLIC_COMPANY} Admin. {new Date().getFullYear()}</Heading4>
                 </div>

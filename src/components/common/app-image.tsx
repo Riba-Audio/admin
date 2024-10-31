@@ -16,7 +16,7 @@ interface AppImageProps {
   height?: number;
   className?: string;
   nonBlur?: boolean
-  // props: any
+  noLoad?: boolean; 
 }
 
 export const aspectRatio = `aspect-w-1 aspect-h-1 xl:aspect-w-7 xl:aspect-h-8 w-full overflow-hidden rounded-lg bg-gray-200`; 
@@ -30,10 +30,11 @@ const AppImage: React.FC<AppImageProps> = ({
   className,
   width,
   height,
-  nonBlur
+  nonBlur,
+  noLoad
   // ...props
 }) => {
-  const [isLoading, setLoading] = React.useState<boolean>(true);
+  const [isLoading, setLoading] = React.useState<boolean>(noLoad ? false: true);
   // const {theme} = useTheme(); 
 
   return (
@@ -47,7 +48,7 @@ const AppImage: React.FC<AppImageProps> = ({
           fill
           className={cn(
             "rounded-lg duration-700 ease-in-out group-hover:opacity-75",
-            isLoading && !nonBlur
+            (isLoading && !nonBlur)
               ? "scale-110 blur-2xl grayscale"
               : "scale-100 blur-0 grayscale-0",
             className || "",
@@ -65,7 +66,7 @@ const AppImage: React.FC<AppImageProps> = ({
           height={height}
           className={cn(
             "duration-700 ease-in-out group-hover:opacity-75",
-            isLoading && !nonBlur
+            (isLoading && !nonBlur)
               ? "scale-110 blur-2xl grayscale"
               : "scale-100 blur-0 grayscale-0",
               className || "",

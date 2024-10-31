@@ -96,8 +96,8 @@ const links: NavLinkType[] = [
         icon: <CreditCard size={20} />
     },
     {
-        text: "GPUs",
-        href: "/gpus",
+        text: "Computers",
+        href: "/computers",
         icon: <Cpu size={20} />
     },
     {
@@ -134,18 +134,23 @@ const footer_links: NavLinkType[] = [
 export const Logo = ({ theme, expanded, className }: { theme: "light" | "dark", expanded?: boolean, className?: string }) => {
 
     return (
-        <AppImage
-            src={theme === "dark" ? 
-                (expanded ? images.logo_white : images.logo_minor_white): 
-                (expanded ? images.logo_black : images.logo_minor_black)
-            }
-            title="Logo"
-            alt="Logo"
-            width={expanded ? 80: 35}
-            height={expanded ? 50: 35}
-            objectFit="contain"
-            nonBlur={true}
-            className={cn(className)}
-        />
+        <div
+            className={cn(expanded ? "w-[80px] h-[40px]": "w-[40px] h-[40px]", "  relative")}
+        >
+
+            <AppImage
+                src={theme === "dark" ? 
+                    (expanded ? images.logo_white : images.logo_minor_white): 
+                    (expanded ? images.logo_black : images.logo_minor_black)
+                }
+                title="Logo"
+                alt="Logo"
+                fill
+                objectFit="contain"
+                nonBlur={true}
+                className={cn("object-contain", className)}
+                noLoad={true}
+            />
+        </div>
     )
 }
