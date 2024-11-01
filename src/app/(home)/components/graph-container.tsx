@@ -15,7 +15,9 @@ import {
   ChartContainer,
   ChartTooltip,
   ChartTooltipContent,
-} from "@/components/ui/chart"
+} from "@/components/ui/chart";
+
+import { cn } from "@/lib/utils"; 
 
 export const description = "An interactive line chart"
 
@@ -127,7 +129,7 @@ const chartConfig = {
   },
 } satisfies ChartConfig
 
-export function ChartComponent() {
+export function ChartComponent({height}: {height: string}) {
   const [activeChart, setActiveChart] =
     React.useState<keyof typeof chartConfig>("desktop")
 
@@ -153,7 +155,7 @@ export function ChartComponent() {
       <CardContent className="px-2 sm:p-6">
         <ChartContainer
           config={chartConfig}
-          className="aspect-auto h-[55vh] w-full"
+          className={cn("aspect-auto w-full", height)}
         >
           <LineChart
             accessibilityLayer
