@@ -1,10 +1,9 @@
 import React, { PropsWithChildren } from "react";
 import SideBar from "./side-bar";
-import User from "./user";
 import UserPopover from "./popovers/user-popover";
 import { Heading1, Heading2, Heading4 } from "./ui/typography";
 import { Copyright } from "lucide-react";
-import ThemeToggle from "@/utils/theme-toggle";
+import ThemeToggle from "@/components/theme-toggle";
 
 // screen container 
 interface ContainerProps extends PropsWithChildren {
@@ -25,7 +24,7 @@ const Container: React.FC<ContainerProps> = ({
                         <Heading1 className="text-xl lg:text-2xl">{title}</Heading1>
                         {
                             subtitle && (
-                                <Heading2 className="text-sm lg:text-md text-grey-500">{subtitle}</Heading2>
+                                <Heading2 className="text-sm lg:text-md text-gray-500">{subtitle}</Heading2>
                             )
                         }
                     </div>
