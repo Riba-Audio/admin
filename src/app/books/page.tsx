@@ -14,7 +14,7 @@ import { DataTable } from "@/components/ui/data-table";
 
 export default function Page() {
     const [loading, setLoading] = React.useState<boolean>(true);
-    const [books, setBooks] = React.useState<BookType[]>([]); 
+    const [books, setBooks] = React.useState<BookType[]>([...dummy_books]); 
     const [count, setCount] = React.useState<number>(0); 
 
     const [search, setSearch] = React.useState<string>(""); 
@@ -35,7 +35,7 @@ export default function Page() {
                 </Button>
             </AddButton>
             <Card className="my-3">
-                <DataTable columns={columns} data={dummy_books} />
+                <DataTable columns={columns} data={books} />
             </Card>
         </Container>
     )

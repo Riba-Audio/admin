@@ -11,7 +11,7 @@ import { DataTable } from "@/components/ui/data-table";
 
 export default function Page() {
     const [loading, setLoading] = React.useState<boolean>(true);
-    const [books, setBooks] = React.useState<OrderType[]>([]);
+    const [orders, setOrders] = React.useState<OrderType[]>([...dummy_orders]);
     const [count, setCount] = React.useState<number>(0);
 
     const [search, setSearch] = React.useState<string>("");
@@ -26,7 +26,7 @@ export default function Page() {
                 />
             </AddButton>
             <Card className="my-3">
-                <DataTable columns={columns} data={dummy_orders} />
+                <DataTable columns={columns} data={orders} />
             </Card>
         </Container>
     )
@@ -47,8 +47,10 @@ const dummy_orders: OrderType[] = [
         payment: {
             id: "pay1",
             status: "Completed",
-            amount: 500
+            amount: 500,
+            mode: "MPESA"
         },
+        completed: 50,
         createdAt: "2023-10-01"
     },
     {
@@ -65,8 +67,10 @@ const dummy_orders: OrderType[] = [
         payment: {
             id: "pay2",
             status: "Pending",
-            amount: 500
+            amount: 500,
+            mode: "MPESA"
         },
+        completed: 50,
         createdAt: "2023-10-02"
     },
     {
@@ -83,8 +87,10 @@ const dummy_orders: OrderType[] = [
         payment: {
             id: "pay3",
             status: "Completed",
-            amount: 500
+            amount: 500,
+            mode: "MPESA"
         },
+        completed: 50,
         createdAt: "2023-10-03"
     },
     {
@@ -101,8 +107,10 @@ const dummy_orders: OrderType[] = [
         payment: {
             id: "pay4",
             status: "Failed",
-            amount: 500
+            amount: 500,
+            mode: "MPESA"
         },
+        completed: 50,
         createdAt: "2023-10-04"
     },
     {
@@ -119,8 +127,10 @@ const dummy_orders: OrderType[] = [
         payment: {
             id: "pay5",
             status: "Completed",
-            amount: 500
+            amount: 500,
+            mode: "MPESA"
         },
+        completed: 50,
         createdAt: "2023-10-05"
     },
     {
@@ -137,8 +147,10 @@ const dummy_orders: OrderType[] = [
         payment: {
             id: "pay6",
             status: "Completed",
-            amount: 500
+            amount: 500,
+            mode: "MPESA"
         },
+        completed: 50,
         createdAt: "2023-10-06"
     },
     {
@@ -155,8 +167,10 @@ const dummy_orders: OrderType[] = [
         payment: {
             id: "pay7",
             status: "Pending",
-            amount: 500
+            amount: 500,
+            mode: "MPESA"
         },
+        completed: 50,
         createdAt: "2023-10-07"
     },
     {
@@ -173,8 +187,10 @@ const dummy_orders: OrderType[] = [
         payment: {
             id: "pay8",
             status: "Completed",
-            amount: 500
+            amount: 500,
+            mode: "MPESA"
         },
+        completed: 50,
         createdAt: "2023-10-08"
     },
     {
@@ -191,8 +207,10 @@ const dummy_orders: OrderType[] = [
         payment: {
             id: "pay9",
             status: "Failed",
-            amount: 500
+            amount: 500,
+            mode: "MPESA"
         },
+        completed: 50,
         createdAt: "2023-10-09"
     },
     {
@@ -209,8 +227,10 @@ const dummy_orders: OrderType[] = [
         payment: {
             id: "pay10",
             status: "Completed",
-            amount: 500
+            amount: 500,
+            mode: "MPESA"
         },
+        completed: 50,
         createdAt: "2023-10-10"
     },
     {
@@ -227,8 +247,10 @@ const dummy_orders: OrderType[] = [
         payment: {
             id: "pay11",
             status: "Completed",
-            amount: 500
+            amount: 500,
+            mode: "MPESA"
         },
+        completed: 50,
         createdAt: "2023-10-11"
     },
     {
@@ -245,8 +267,10 @@ const dummy_orders: OrderType[] = [
         payment: {
             id: "pay12",
             status: "Pending",
-            amount: 500
+            amount: 500,
+            mode: "MPESA"
         },
+        completed: 50,
         createdAt: "2023-10-12"
     },
     {
@@ -263,8 +287,10 @@ const dummy_orders: OrderType[] = [
         payment: {
             id: "pay13",
             status: "Completed",
-            amount: 500
+            amount: 500,
+            mode: "MPESA"
         },
+        completed: 50,
         createdAt: "2023-10-13"
     },
     {
@@ -281,8 +307,10 @@ const dummy_orders: OrderType[] = [
         payment: {
             id: "pay14",
             status: "Completed",
-            amount: 500
+            amount: 500,
+            mode: "MPESA"
         },
+        completed: 50,
         createdAt: "2023-10-14"
     },
     {
@@ -299,8 +327,10 @@ const dummy_orders: OrderType[] = [
         payment: {
             id: "pay15",
             status: "Failed",
-            amount: 500
+            amount: 500,
+            mode: "MPESA"
         },
+        completed: 50,
         createdAt: "2023-10-15"
     },
     {
@@ -317,8 +347,10 @@ const dummy_orders: OrderType[] = [
         payment: {
             id: "pay16",
             status: "Pending",
-            amount: 500
+            amount: 500,
+            mode: "MPESA"
         },
+        completed: 50,
         createdAt: "2023-10-16"
     },
     {
@@ -335,8 +367,10 @@ const dummy_orders: OrderType[] = [
         payment: {
             id: "pay17",
             status: "Completed",
-            amount: 500
+            amount: 500,
+            mode: "MPESA"
         },
+        completed: 50,
         createdAt: "2023-10-17"
     },
     {
@@ -353,8 +387,10 @@ const dummy_orders: OrderType[] = [
         payment: {
             id: "pay18",
             status: "Completed",
-            amount: 500
+            amount: 500,
+            mode: "MPESA"
         },
+        completed: 50,
         createdAt: "2023-10-18"
     },
     {
@@ -371,8 +407,10 @@ const dummy_orders: OrderType[] = [
         payment: {
             id: "pay19",
             status: "Pending",
-            amount: 500
+            amount: 500,
+            mode: "MPESA"
         },
+        completed: 50,
         createdAt: "2023-10-19"
     },
     {
@@ -389,8 +427,10 @@ const dummy_orders: OrderType[] = [
         payment: {
             id: "pay20",
             status: "Completed",
-            amount: 500
+            amount: 500,
+            mode: "MPESA"
         },
+        completed: 50,
         createdAt: "2023-10-20"
     }
 ];

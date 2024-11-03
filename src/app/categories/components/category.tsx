@@ -16,7 +16,10 @@ const Category: React.FC<CategoryProps> = (
 ) => {
 
     return (
-        <Card className="rounded-full px-3 py-1 cursor-pointer hover:border-secondary-color">
+        <Card 
+            className="rounded-full px-3 py-1 cursor-pointer hover:border-secondary-color flex items-center gap-4 px-3"
+            onClick={() => setCategories([...categories.filter(ct => ct !== category)])}
+        >
             <Paragraph>{category}</Paragraph>
             <X size={18}/>
         </Card>

@@ -11,9 +11,9 @@ import AddButton from "@/components/add";
 
 
 export default function Page() {
-    const [count, setCount] = React.useState<number>(0);
-    const [categories, setCategories] = React.useState<string[]>([]);
-    const [loading, setLoading] = React.useState<boolean>(true);
+    const [count, setCount] = React.useState<number>(1);
+    const [categories, setCategories] = React.useState<string[]>([...dummy_categories]);
+    const [loading, setLoading] = React.useState<boolean>(false);
 
 
 
@@ -32,7 +32,7 @@ export default function Page() {
                     ))
                 }
                 {
-                    (loading && count) ? categories.map((cat, index) => (
+                    (!loading && count) ? categories.map((cat, index) => (
                         <Category categories={categories} category={cat} setCategories={setCategories} key={index} />
                     )):<></>
                 }
@@ -46,4 +46,27 @@ export default function Page() {
             </div>
         </Container>
     )
-}
+};
+
+const dummy_categories: string[] = [
+    "Fiction",
+    "Non-Fiction",
+    "Mystery",
+    "Science Fiction",
+    "Fantasy",
+    "Biography",
+    "Historical Fiction",
+    "Romance",
+    "Self-Help",
+    "Health & Wellness",
+    "Children's",
+    "Young Adult",
+    "Classic Literature",
+    "Thriller",
+    "Poetry",
+    "Graphic Novels",
+    "Cookbooks",
+    "Travel",
+    "Science",
+    "Religion & Spirituality"
+];
