@@ -3,6 +3,7 @@ import React from 'react';
 import { Rating as RatingComponent } from 'react-simple-star-rating';
 
 import { Skeleton } from '../ui/skeleton';
+import { formatLargeNumber } from '@/utils/format-numbers';
 
 const Rating = (
     {rating, count = 0, className, readOnly = true, size = 15, setRating}: 
@@ -32,7 +33,7 @@ const Rating = (
           <span>({rating}) </span>
           {
             (count && count !== 0) ? (
-              <span>&nbsp; - &nbsp;{count || 0}</span> 
+              <span>&nbsp; - &nbsp;{formatLargeNumber(count || 0)}</span> 
             ): <span />
           }
         </span>

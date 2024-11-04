@@ -18,13 +18,19 @@ export default function Page() {
 
 
     return (
-        <Container title="Categories" subtitle={`Total - 50 categories`}>
-            <AddButton>
-                <Button className="items-center gap-2 rounded-full" size="sm">
-                    <Plus size={14}/>
-                    <span>Add Category</span>
-                </Button>
-            </AddButton>
+        <Container 
+            title="Categories" 
+            subtitle={`Total - 50 categories`}
+            headerComponent={
+                <AddButton>
+                    <Button className="items-center gap-2 rounded-full" size="sm">
+                        <Plus size={14}/>
+                        <span>Add Category</span>
+                    </Button>
+                </AddButton>
+
+            }
+        >
             <div className="my-3 flex gap-2 flex-wrap">
                 {
                     loading && createArray(30).map(itm => (

@@ -13,7 +13,7 @@ const User = ({className}: {className?: string}) => {
         avatar: ""
     }
     return (
-        <Card className={cn("rounded-md flex items-center gap-2 bg-background w-fit px-2 py-1 duration-700 hover:border-secondary-color hover:bg-secondary cursor-pointer", className)}>
+        <Card className={cn("rounded-lg flex items-center gap-2 bg-background w-fit px-5 py-2 duration-700 hover:border-secondary-color hover:bg-secondary cursor-pointer", className)}>
             <AppAvatar 
                 name={user.name}
                 src={user.avatar}

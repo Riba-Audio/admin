@@ -12,7 +12,7 @@ const UserPopover = () => {
             trigger={
                 <User className="self-end"/>
             }
-            contentClassName="w-[180px] absolute -mt-1 -right-[4.3rem]"
+            contentClassName="w-[180px] absolute -mt-[.1rem] -right-[5rem]"
         >
             <div className="flex flex-col gap-3">
                 <AppLink 

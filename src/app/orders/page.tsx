@@ -16,15 +16,20 @@ export default function Page() {
 
     const [search, setSearch] = React.useState<string>("");
     return (
-        <Container title="Orders">
-            <AddButton>
-                <AppInput
-                    value={search}
-                    setValue={setSearch}
-                    placeholder={"Search order..."}
-                    containerClassName="rounded-full min-w-[200px]"
-                />
-            </AddButton>
+        <Container 
+            title="Orders"
+            headerComponent={
+                <AddButton>
+                    <AppInput
+                        value={search}
+                        setValue={setSearch}
+                        placeholder={"Search order..."}
+                        containerClassName="rounded-full min-w-[250px] lg:min-w-[350px]"
+                    />
+                </AddButton>
+
+            }
+        >
             <Card className="my-3">
                 <DataTable columns={columns} data={orders} />
             </Card>
@@ -42,7 +47,10 @@ const dummy_orders: OrderType[] = [
         book: {
             id: "1",
             title: "The Great Gatsby",
-            banner: "path/to/gatsby/banner.jpg"
+            author: "Herman Melville",
+            banner: "path/to/mobydick/banner.jpg",
+            pages: 585,
+            published: "1851-10-18"
         },
         payment: {
             id: "pay1",
@@ -61,8 +69,11 @@ const dummy_orders: OrderType[] = [
         },
         book: {
             id: "2",
-            title: "To Kill a Mockingbird",
-            banner: "path/to/mockingbird/banner.jpg"
+            title: "The Great Gatsby",
+            author: "Herman Melville",
+            banner: "path/to/mobydick/banner.jpg",
+            pages: 585,
+            published: "1851-10-18"
         },
         payment: {
             id: "pay2",
@@ -81,8 +92,11 @@ const dummy_orders: OrderType[] = [
         },
         book: {
             id: "3",
-            title: "1984",
-            banner: "path/to/1984/banner.jpg"
+            title: "The Great Gatsby",
+            author: "Herman Melville",
+            banner: "path/to/mobydick/banner.jpg",
+            pages: 585,
+            published: "1851-10-18"
         },
         payment: {
             id: "pay3",
@@ -101,8 +115,11 @@ const dummy_orders: OrderType[] = [
         },
         book: {
             id: "4",
-            title: "Moby Dick",
-            banner: "path/to/mobydick/banner.jpg"
+            title: "The Great Gatsby",
+            author: "Herman Melville",
+            banner: "path/to/mobydick/banner.jpg",
+            pages: 585,
+            published: "1851-10-18"
         },
         payment: {
             id: "pay4",
@@ -121,8 +138,11 @@ const dummy_orders: OrderType[] = [
         },
         book: {
             id: "5",
-            title: "Pride and Prejudice",
-            banner: "path/to/prideandprejudice/banner.jpg"
+            title: "The Great Gatsby",
+            author: "Herman Melville",
+            banner: "path/to/mobydick/banner.jpg",
+            pages: 585,
+            published: "1851-10-18"
         },
         payment: {
             id: "pay5",
@@ -141,8 +161,11 @@ const dummy_orders: OrderType[] = [
         },
         book: {
             id: "6",
-            title: "The Catcher in the Rye",
-            banner: "path/to/catcher/banner.jpg"
+            title: "The Great Gatsby",
+            author: "Herman Melville",
+            banner: "path/to/mobydick/banner.jpg",
+            pages: 585,
+            published: "1851-10-18"
         },
         payment: {
             id: "pay6",
@@ -161,8 +184,11 @@ const dummy_orders: OrderType[] = [
         },
         book: {
             id: "7",
-            title: "The Hobbit",
-            banner: "path/to/hobbit/banner.jpg"
+            title: "The Great Gatsby",
+            author: "Herman Melville",
+            banner: "path/to/mobydick/banner.jpg",
+            pages: 585,
+            published: "1851-10-18"
         },
         payment: {
             id: "pay7",
@@ -181,8 +207,11 @@ const dummy_orders: OrderType[] = [
         },
         book: {
             id: "8",
-            title: "Fahrenheit 451",
-            banner: "path/to/fahrenheit/banner.jpg"
+            title: "The Great Gatsby",
+            author: "Herman Melville",
+            banner: "path/to/mobydick/banner.jpg",
+            pages: 585,
+            published: "1851-10-18"
         },
         payment: {
             id: "pay8",
@@ -201,8 +230,11 @@ const dummy_orders: OrderType[] = [
         },
         book: {
             id: "9",
-            title: "Brave New World",
-            banner: "path/to/bravenewworld/banner.jpg"
+            title: "The Great Gatsby",
+            author: "Herman Melville",
+            banner: "path/to/mobydick/banner.jpg",
+            pages: 585,
+            published: "1851-10-18"
         },
         payment: {
             id: "pay9",
@@ -221,8 +253,11 @@ const dummy_orders: OrderType[] = [
         },
         book: {
             id: "10",
-            title: "The Picture of Dorian Gray",
-            banner: "path/to/doriangray/banner.jpg"
+            title: "The Great Gatsby",
+            author: "Herman Melville",
+            banner: "path/to/mobydick/banner.jpg",
+            pages: 585,
+            published: "1851-10-18"
         },
         payment: {
             id: "pay10",
@@ -241,8 +276,11 @@ const dummy_orders: OrderType[] = [
         },
         book: {
             id: "11",
-            title: "The Alchemist",
-            banner: "path/to/alchemist/banner.jpg"
+            title: "The Great Gatsby",
+            author: "Herman Melville",
+            banner: "path/to/mobydick/banner.jpg",
+            pages: 585,
+            published: "1851-10-18"
         },
         payment: {
             id: "pay11",
@@ -261,8 +299,11 @@ const dummy_orders: OrderType[] = [
         },
         book: {
             id: "12",
-            title: "The Kite Runner",
-            banner: "path/to/kiterunner/banner.jpg"
+            title: "The Great Gatsby",
+            author: "Herman Melville",
+            banner: "path/to/mobydick/banner.jpg",
+            pages: 585,
+            published: "1851-10-18"
         },
         payment: {
             id: "pay12",
@@ -281,8 +322,11 @@ const dummy_orders: OrderType[] = [
         },
         book: {
             id: "13",
-            title: "The Road",
-            banner: "path/to/road/banner.jpg"
+            title: "The Great Gatsby",
+            author: "Herman Melville",
+            banner: "path/to/mobydick/banner.jpg",
+            pages: 585,
+            published: "1851-10-18"
         },
         payment: {
             id: "pay13",
@@ -301,8 +345,11 @@ const dummy_orders: OrderType[] = [
         },
         book: {
             id: "14",
-            title: "Sapiens: A Brief History of Humankind",
-            banner: "path/to/sapiens/banner.jpg"
+            title: "The Great Gatsby",
+            author: "Herman Melville",
+            banner: "path/to/mobydick/banner.jpg",
+            pages: 585,
+            published: "1851-10-18"
         },
         payment: {
             id: "pay14",
@@ -321,8 +368,11 @@ const dummy_orders: OrderType[] = [
         },
         book: {
             id: "15",
-            title: "Educated",
-            banner: "path/to/educated/banner.jpg"
+            title: "The Great Gatsby",
+            author: "Herman Melville",
+            banner: "path/to/mobydick/banner.jpg",
+            pages: 585,
+            published: "1851-10-18"
         },
         payment: {
             id: "pay15",
@@ -341,8 +391,11 @@ const dummy_orders: OrderType[] = [
         },
         book: {
             id: "16",
-            title: "Where the Crawdads Sing",
-            banner: "path/to/crawdads/banner.jpg"
+            title: "The Great Gatsby",
+            author: "Herman Melville",
+            banner: "path/to/mobydick/banner.jpg",
+            pages: 585,
+            published: "1851-10-18"
         },
         payment: {
             id: "pay16",
@@ -361,8 +414,11 @@ const dummy_orders: OrderType[] = [
         },
         book: {
             id: "17",
-            title: "Becoming",
-            banner: "path/to/becoming/banner.jpg"
+            title: "The Great Gatsby",
+            author: "Herman Melville",
+            banner: "path/to/mobydick/banner.jpg",
+            pages: 585,
+            published: "1851-10-18"
         },
         payment: {
             id: "pay17",
@@ -381,8 +437,11 @@ const dummy_orders: OrderType[] = [
         },
         book: {
             id: "18",
-            title: "The Silent Patient",
-            banner: "path/to/silentpatient/banner.jpg"
+            title: "The Great Gatsby",
+            author: "Herman Melville",
+            banner: "path/to/mobydick/banner.jpg",
+            pages: 585,
+            published: "1851-10-18"
         },
         payment: {
             id: "pay18",
@@ -401,8 +460,11 @@ const dummy_orders: OrderType[] = [
         },
         book: {
             id: "19",
-            title: "Circe",
-            banner: "path/to/circe/banner.jpg"
+            title: "The Great Gatsby",
+            author: "Herman Melville",
+            banner: "path/to/mobydick/banner.jpg",
+            pages: 585,
+            published: "1851-10-18"
         },
         payment: {
             id: "pay19",
@@ -421,8 +483,11 @@ const dummy_orders: OrderType[] = [
         },
         book: {
             id: "20",
-            title: "The Vanishing Half",
-            banner: "path/to/vanishinghalf/banner.jpg"
+            title: "The Great Gatsby",
+            author: "Herman Melville",
+            banner: "path/to/mobydick/banner.jpg",
+            pages: 585,
+            published: "1851-10-18"
         },
         payment: {
             id: "pay20",

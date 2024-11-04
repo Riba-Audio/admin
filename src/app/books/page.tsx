@@ -10,9 +10,11 @@ import { BookType, columns } from "@/components/data-columns/books";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { DataTable } from "@/components/ui/data-table";
+import { useRouter } from "next/navigation";
 
 
 export default function Page() {
+    const {push} = useRouter(); 
     const [loading, setLoading] = React.useState<boolean>(true);
     const [books, setBooks] = React.useState<BookType[]>([...dummy_books]); 
     const [count, setCount] = React.useState<number>(0); 
@@ -21,19 +23,27 @@ export default function Page() {
 
     return (
         
-        <Container title="Books" subtitle="Found - 254 books">
-            <AddButton>
-                <AppInput 
-                    value={search}
-                    setValue={setSearch}
-                    placeholder={"Search book..."}
-                    containerClassName="rounded-full min-w-[200px]"
-                />
-                <Button className="items-center gap-2 rounded-full" size="icon">
-                    <Plus size={17}/>
-                    {/* <span>Add Book</span> */}
-                </Button>
-            </AddButton>
+        <Container 
+            title="Books" 
+            subtitle="Found - 254 books"
+            headerComponent={
+                <AddButton>
+                    <AppInput 
+                        value={search}
+                        setValue={setSearch}
+                        placeholder={"Search book..."}
+                        containerClassName="rounded-full min-w-[250px] lg:min-w-[350px]"
+                    />
+                    <Button 
+                        className="items-center gap-2 rounded-full" 
+                        size="icon"
+                        onClick={() => push("/books/new")}
+                    >
+                        <Plus size={17}/>
+                    </Button>
+                </AddButton>
+            }
+        >
             <Card className="my-3">
                 <DataTable columns={columns} data={books} />
             </Card>

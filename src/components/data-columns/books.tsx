@@ -40,22 +40,27 @@ export type BookType = {
 
 export const BookBanner = ({src, title}: {src: string, title: string}) => (
     <span
-        className="block w-[80px] h-[70px] relative border-gray-500"
+        className="flex justify-center w-[100px] -mr-8"
     >
-        <AppImage 
-            alt={title}
-            title={title}
-            src={process.env.NODE_ENV == "development" ? images.dummy_book_image: src}
-            fill
-            nonBlur={true}
-        />
+        <span className="w-[100px] h-[80px] relative border-gray-500">
+            <AppImage 
+                alt={title}
+                title={title}
+                src={process.env.NODE_ENV == "development" ? images.dummy_book_image: src}
+                fill
+                nonBlur={true}
+            />
+        </span>
     </span>
-)
+);
+
+ 
 
 export const columns: ColumnDef<BookType>[] = [
     {
         accessorKey: "info",
         header: "",
+        size: 80, 
         cell: (({ row}) => {
             let book = row.original; 
 
@@ -81,6 +86,7 @@ export const columns: ColumnDef<BookType>[] = [
             )
         })
     },
+  
     {
         accessorKey: "amount",
         header: "Amount",
@@ -123,7 +129,7 @@ export const columns: ColumnDef<BookType>[] = [
     {
         accessorKey: "rating",
         header: "Rating",
-        cell: (({ row }) => (<Rating rating={row.getValue("rating")} count={row.getValue("ratingsCount")}/>))
+        cell: (({ row }) => (<Rating rating={row.getValue("rating")} count={row.original.ratingsCount}/>))
     },
     {
         accessorKey: "id",

@@ -3,17 +3,18 @@ import { BookBanner } from "./books";
 import { Badge } from "../ui/badge";
 import { cn } from "@/lib/utils";
 import dayjs from "dayjs";
+import { BookInfoType } from "./books"; 
 
 export type UserOrderType = {
     id: string;
     name: string;
 }
 
-export type BookOrderType = {
-    id: string;
-    title: string;
-    banner: string;
-}
+// export type BookOrderType = {
+//     id: string;
+//     title: string;
+//     banner: string;
+// }
 export type PaymentOrderType = {
     id: string;
     status: string;
@@ -23,7 +24,7 @@ export type PaymentOrderType = {
 export type OrderType = {
     id: string;
     user: UserOrderType;
-    book: BookOrderType;
+    book: BookInfoType & {id: string; title: string; published?: string};
     payment: PaymentOrderType;
     completed: number;
     createdAt: string;
@@ -51,7 +52,11 @@ export const columns: ColumnDef<OrderType>[] = [
         cell: (({ row }) => {
             let order = row.original;
             return (
-                <span className="block max-w-[200px] overflow-auto">{order.book.title}</span>
+                <span className="flex flex-col gap-2 max-[250px]">
+                    <span className="font-bold text-sm lg:text-md line-clamp-1">{order.book.title}</span>
+                    <span className="text-xs lg:text-xs text-gray-500 line-clamp-1">{order.book.author} | {order.book.pages} pages</span>
+                     
+                </span>
             )
         })
     },

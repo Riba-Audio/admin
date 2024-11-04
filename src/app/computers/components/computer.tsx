@@ -4,11 +4,17 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
+import { Separator } from "@/components/ui/separator";
 import { Heading2, Paragraph } from "@/components/ui/typography";
 import { cn } from "@/lib/utils";
 import { Copy, SquarePen, Trash2 } from "lucide-react";
 
 export type ComputerStatusType = "idle" | "processing" | "down" | "terminated"; 
+type BookProcessingType = {
+    title: string; 
+    section: string; 
+    id: string; 
+}
 export type ComputerInfoType = {
     storage: string;
     ram: number; 
@@ -22,6 +28,7 @@ export type ComputerType = {
     title: string; 
     info: ComputerInfoType;
     ngrok: string; 
+    book?: BookProcessingType; 
 }
 
 interface ComputerProps extends ComputerType {};
@@ -29,11 +36,11 @@ interface ComputerProps extends ComputerType {};
 const Computer: React.FC<ComputerProps> = (
     {id, status, title, info, ngrok}
 ) => {
-    let bdgeBg = status === "processing" ? "bg-yellow-500": status === "down" || status === "terminated" ? "bg-red-500": "";
+    let bdgeBg = status === "processing" ? "bg-yellow-500": status === "down" || status === "terminated" ? "bg-red-500": "bg-secondary";
     let bdgeType: "outline" | "default" = status === "idle" ? "outline": "default"; 
     return (
         <Card 
-            className="flex flex-col gap-2 rounded-md flex-1 p-3 pt-7 pb-5"
+            className="flex flex-col gap-2 rounded-md flex-1 p-3 py-5"
         >
             <div className="flex justify-between items-center">
                 <Badge variant={bdgeType} className={cn(bdgeBg)} >{status}</Badge>
@@ -50,6 +57,9 @@ const Computer: React.FC<ComputerProps> = (
                 <span className="max-w-[80%]">{ngrok}</span>
                 <span className="cursor-pointer hover:text-secondary-color"><Copy size={16}/></span>
             </Paragraph>
+            <Separator />
+            <Paragraph className="text-xs lg:text-sm line-clamp-1 my-2">Processing: </Paragraph>
+            <Separator />
             <div className="flex gap-2 items-center justify-end">
                     <Button
                         variant="ghost"

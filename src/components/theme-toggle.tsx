@@ -8,30 +8,35 @@ import { Moon, Sun, SunMedium } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
-export default function ThemeToggle() {
+export default function ThemeToggle({expanded}: {expanded: boolean}) {
     const { theme, setTheme } = useTheme();
     const [mounted, setMounted] = React.useState(false)
 
     React.useEffect(() => { setMounted(true) }, []);
 
     if (!mounted) return <Button size="icon" variant="secondary" />;
+    type Theme = "dark" | "light"
+    let cls = (theme: any, pref: Theme) => cn(theme === pref ? "bg-secondary": "", "justify-start hover:bg-background duration-700 hover:text-secondary-color"); 
     return (
-        <div className={cn("border border-gray-500 flex gap-1 bg-secondary rounded-full")}>
+        <div className={cn(" flex flex-col gap-1 my-12")}>
             <Button 
                 size={"sm"} 
-                variant="secondary" 
-                className={cn(theme === "light" ? "bg-background": "", "rounded-full hover:bg-background duration-700 hover:text-secondary-color")}
+                variant={theme === "light" ? "secondary": "ghost"} 
+                className={cls(theme || "light", "light")}
                 onClick={() => setTheme("light")}
             >
                 <SunMedium size={18} />
+                {expanded && <span>Light</span>}
             </Button>
             <Button 
                 size="sm" 
-                variant="ghost" 
-                className={cn(theme === "dark" ? "bg-background": "", "rounded-full hover:bg-background duration-700 hover:text-main-color")}
+                variant={theme === "dark" ? "secondary": "ghost"} 
+                className={cls(theme || "light", "dark")}
+                    // cn(theme === "dark" ? "bg-secondary": "", "hover:bg-background duration-700 hover:text-main-color")}
                 onClick={() => setTheme("dark")}
             >
                 <Moon size={18} />
+                {expanded && <span>Dark</span>}
             </Button>
         </div>
     )

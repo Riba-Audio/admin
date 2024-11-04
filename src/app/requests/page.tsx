@@ -16,16 +16,22 @@ export default function Page() {
     const [search, setSearch] = React.useState<string>("");
 
     return (
-        <Container title="Requests">
-            <AddButton>
-                <AppInput
-                    value={search}
-                    setValue={setSearch}
-                    placeholder={"Search request..."}
-                    containerClassName="rounded-full min-w-[200px]"
-                />
+        <Container 
+            title="Requests"
+            subtitle={`Total - ${count} requests`}
+            headerComponent={
+                <AddButton>
+                    <AppInput
+                        value={search}
+                        setValue={setSearch}
+                        placeholder={"Search request..."}
+                        containerClassName="rounded-full min-w-[250px] lg:min-w-[350px]"
+                    />
+    
+                </AddButton>
 
-            </AddButton>
+            }
+        >
             <Card className="my-3 ">
                 <DataTable columns={columns} data={requests} />
             </Card>

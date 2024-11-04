@@ -18,13 +18,18 @@ export default function Page() {
 
 
     return (
-        <Container title="Computers" subtitle={`Total - ${count}`}>
-            <AddButton>
-                <Button className="my-3 rounded-full items-center gap-4">
-                    <Plus size={18}/>
-                    <span>Add Computer</span>
-                </Button>
-            </AddButton>
+        <Container 
+            title="Computers" 
+            subtitle={`Total - ${count}`}
+            headerComponent={
+                <AddButton>
+                    <Button className="my-3 rounded-full items-center gap-4">
+                        <Plus size={18}/>
+                        <span>Add Computer</span>
+                    </Button>
+                </AddButton>
+            }
+        >
             {
                 loading && (
                     <div className="grid grid-cols-4 gap-2">

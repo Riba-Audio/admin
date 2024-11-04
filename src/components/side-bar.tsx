@@ -11,26 +11,20 @@ import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { Button } from "./ui/button";
 import React from "react";
+import ThemeToggle from "@/components/theme-toggle";
 
 
 const SideBar = () => {
     const theme: any = useTheme().theme ?? "dark";
     const pathname = usePathname();
 
+    console.log(theme)
     const [expandSideBar, setExpandSideBar] = React.useState<boolean>(false);
 
-    let linkClassName = (link: NavLinkType) => cn(pathname === link.href ? "bg-secondary text-secondary-color" : "", "my-1 hover:bg-secondary px-2 py-2")
+    let linkClassName = (link: NavLinkType) => cn(pathname === link.href ? "bg-secondary text-secondary-color" : "", "my-1 hover:bg-secondary pl-2 py-2")
     return (
-        <section className={cn(expandSideBar ? "min-w-[180px]" : "", "duration-700 z-0 relative py-3 border-r-[.3px] border-r-grey-500 bg-background flex flex-col h-full overflow-hidden")}>
-            <Button
-                variant={"secondary"}
-                size={"icon"}
-                className=" absolute right-0 bottom-0 mb-[7rem] -mr-[.5rem] z-[9999]"
-                onClick={() => setExpandSideBar(!expandSideBar)}
-            >
-                <ChevronsLeftRightIcon size={18} />
-            </Button>
-            <Logo theme={theme} expanded={expandSideBar} className="px-2"/>
+        <section className={cn(expandSideBar ? "min-w-[180px]" : "", "py-4 duration-700 z-0 relative border-r-[.3px] border-r-gray-300 bg-background flex flex-col h-full overflow-hidden")}>
+            <Logo theme={theme} expanded={expandSideBar} className=" px-2"/>
             <Separator className="my-3" />
             <nav className="flex-1 flex flex-col">
                 <div className="flex-1">
@@ -48,6 +42,7 @@ const SideBar = () => {
                     }
                 </div>
                 <div>
+                    <ThemeToggle expanded={expandSideBar}/>
                     {
                         footer_links.map((link, index) => (
                             <AppLink
@@ -60,6 +55,17 @@ const SideBar = () => {
                             />
                         ))
                     }
+                </div>
+                <div className="flex justify-end my-2 px-1">
+                    <span
+                        // variant={"secondary"}
+                        // size={"icon"}
+                        className="block w-fit cursor-pointer p-2 rounded-sm "
+                        onClick={() => setExpandSideBar(!expandSideBar)}
+                    >
+                        <ChevronsLeftRightIcon size={18} />
+                    </span>
+
                 </div>
             </nav>
         </section>
@@ -132,17 +138,24 @@ const footer_links: NavLinkType[] = [
 ]
 
 export const Logo = ({ theme, expanded, className }: { theme: "light" | "dark", expanded?: boolean, className?: string }) => {
+    const [logo, setLogo] = React.useState<string>(images.logo_minor_black); 
 
+    React.useEffect(() => {
+        if (theme) {
+            let img = theme === "dark" ? 
+            (expanded ? images.logo_white : images.logo_minor_white): 
+            (expanded ? images.logo_black : images.logo_minor_black)
+        
+            setLogo(img)
+        }
+    },[theme, expanded])
     return (
         <div
             className={cn(expanded ? "w-[80px] h-[40px]": "w-[40px] h-[40px]", "  relative")}
         >
 
             <AppImage
-                src={theme === "dark" ? 
-                    (expanded ? images.logo_white : images.logo_minor_white): 
-                    (expanded ? images.logo_black : images.logo_minor_black)
-                }
+                src={logo}
                 title="Logo"
                 alt="Logo"
                 fill
