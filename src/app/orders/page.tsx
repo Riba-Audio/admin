@@ -1,9 +1,9 @@
 "use client"; 
 
 import React from "react";
-import AddButton from "@/components/add";
+import AddButton from "@/components/utils/add";
 import AppInput from "@/components/common/app-input";
-import Container from "@/components/container";
+import Container from "@/components/utils/container";
 import { columns, OrderType } from "@/components/data-columns/orders";
 import { Card } from "@/components/ui/card";
 import { DataTable } from "@/components/ui/data-table";

@@ -3,9 +3,9 @@
 import React from "react";
 import { Plus } from "lucide-react";
 
-import AddButton from "@/components/add";
+import AddButton from "@/components/utils/add";
 import AppInput from "@/components/common/app-input";
-import Container from "@/components/container";
+import Container from "@/components/utils/container";
 import { BookType, columns } from "@/components/data-columns/books";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";

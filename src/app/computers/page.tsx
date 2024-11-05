@@ -1,12 +1,12 @@
 "use client"; 
 
-import Container from "@/components/container";
+import Container from "@/components/utils/container";
 import React from "react";
 import Computer, { ComputerSkeleton, ComputerType } from "./components/computer";
 import { createArray } from "@/utils/format-numbers";
 import { Card } from "@/components/ui/card";
 import { Heading2 } from "@/components/ui/typography";
-import AddButton from "@/components/add";
+import AddButton from "@/components/utils/add";
 import { Button } from "@/components/ui/button";
 import { Plus } from "lucide-react";
 

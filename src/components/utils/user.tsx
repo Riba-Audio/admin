@@ -1,9 +1,9 @@
 // user card main 
 
 import { ChevronDown } from "lucide-react"
-import AppAvatar from "./common/app-avatar"
-import { Card } from "./ui/card"
-import { Heading5, Paragraph } from "./ui/typography"
+import AppAvatar from "../common/app-avatar"
+import { Card } from "../ui/card"
+import { Heading5, Paragraph } from "../ui/typography"
 import { cn } from "@/lib/utils";
 
 const User = ({className}: {className?: string}) => {

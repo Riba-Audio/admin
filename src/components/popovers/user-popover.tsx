@@ -1,6 +1,6 @@
 import { Cog, LogOut, UserIcon } from "lucide-react"
 import AppLink from "../common/app-link"
-import User from "../user"
+import User from "../utils/user"
 import PopoverContainer from "./container"
 
 

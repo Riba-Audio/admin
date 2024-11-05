@@ -1,24 +1,22 @@
 // sidebar 
 "use client";
 
+import React from "react";
 import { useTheme } from "next-themes"
-import AppImage from "./common/app-image";
+import AppImage from "../common/app-image";
 import { images } from "@/assets";
 import { ChartNoAxesCombined, ChevronsLeftRightIcon, Cog, Cpu, CreditCard, GitPullRequest, Layers3, Library, LogOut, Shield, Users } from "lucide-react";
-import { Separator } from "./ui/separator";
-import AppLink from "./common/app-link";
+import { Separator } from "../ui/separator";
+import AppLink from "../common/app-link";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
-import { Button } from "./ui/button";
-import React from "react";
-import ThemeToggle from "@/components/theme-toggle";
+import ThemeToggle from "@/components/utils/theme-toggle";
 
 
 const SideBar = () => {
     const theme: any = useTheme().theme ?? "dark";
     const pathname = usePathname();
 
-    console.log(theme)
     const [expandSideBar, setExpandSideBar] = React.useState<boolean>(false);
 
     let linkClassName = (link: NavLinkType) => cn(pathname === link.href ? "bg-secondary text-secondary-color" : "", "my-1 hover:bg-secondary pl-2 py-2")

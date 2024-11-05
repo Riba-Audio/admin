@@ -3,6 +3,7 @@ import logo_black from "./logo-black.png";
 
 import logo_minor_white from "./logo-white-minor.png";
 import logo_minor_black from "./logo-black-minor.png"; 
+import placeholder_img from "./photo.png"; 
 
 import dummy_book_image from "./51UphHY82OL.png"; 
 
@@ -12,7 +13,8 @@ let images = {
 
     logo_minor_white: logo_minor_white.src, 
     logo_minor_black: logo_minor_black.src,
-
+    placeholder_img: placeholder_img.src, 
+    
     dummy_book_image: dummy_book_image.src
 }
 

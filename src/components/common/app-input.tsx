@@ -16,7 +16,7 @@ interface InputProps {
     cls?: string;
     containerClassName?: string; 
     disabled?: boolean;
-    onKeyDown?: (str: string) => void;
+    onKeyUp?: (str: string | number) => void;
     textarea?: boolean;
     icon?: React.ReactNode; 
     button?: React.ReactNode;
@@ -34,7 +34,7 @@ const AppInput: React.FC<InputProps> = ({
     cls,
     containerClassName, 
     disabled,
-    onKeyDown,
+    onKeyUp,
     textarea = false,
     icon,
     button,
@@ -48,8 +48,8 @@ const AppInput: React.FC<InputProps> = ({
 
     return (
         <>
-            {label && <Heading4>{label}</Heading4>}
-            <div className={cn(active ? "border-secondary-color": "border-gray-500", "bg-secondary flex items-center gap-1 px-2 py-[.02rem] pr-[.02rem] border-[.01rem] rounded-lg overflow-hidden", containerClassName)}>
+            {label && <Heading4 className="text-sm lg:text-md my-2">{label}</Heading4>}
+            <div className={cn(active ? "border-secondary-color": "border-gray-300", "duration bg-transparent flex items-center gap-1 px-2 py-[.02rem] pr-[.02rem] border-[.01rem] rounded-sm overflow-hidden", containerClassName)}>
                 {icon && icon}
                 {textarea ? (
                     <Textarea
@@ -60,7 +60,7 @@ const AppInput: React.FC<InputProps> = ({
                         placeholder={String(placeholder || "Enter text...")}
                         onBlur={() => setActive(false)}
                         onFocus={() => setActive(true)}
-                        onKeyDown={onKeyDown ? (e: any) => onKeyDown(e.target.value): () => {}}
+                        onKeyUp={onKeyUp ? (e: any) => onKeyUp(e.target.value): () => {}}
                     />
                 ) : (
                     <Input
@@ -72,7 +72,7 @@ const AppInput: React.FC<InputProps> = ({
                         placeholder={String(placeholder || "Enter text...")}
                         onBlur={() => setActive(false)}
                         onFocus={() => setActive(true)}
-                        onKeyDown={onKeyDown ? (e: any) => onKeyDown(e.target.value): () => {}}
+                        onKeyUp={onKeyUp ? (e: any) => onKeyUp(e.target.value): () => {}}
                     />
                 )}
                 {button && button}

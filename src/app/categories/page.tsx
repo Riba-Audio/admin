@@ -1,5 +1,5 @@
 "use client";
-import Container from "@/components/container";
+import Container from "@/components/utils/container";
 import { createArray } from "@/utils/format-numbers";
 import React from "react";
 import Category, { CategorySkeleton } from "./components/category";
@@ -7,7 +7,7 @@ import { Card } from "@/components/ui/card";
 import { Heading3, Paragraph } from "@/components/ui/typography";
 import { Button } from "@/components/ui/button";
 import { Plus } from "lucide-react";
-import AddButton from "@/components/add";
+import AddButton from "@/components/utils/add";
 
 
 export default function Page() {

@@ -1,4 +1,4 @@
-import Container from "@/components/container";
+import Container from "@/components/utils/container";
 import Cards from "./components/cards";
 import { ChartComponent } from "./components/graph-container";
 import Requests from "./components/requests";

@@ -2,15 +2,15 @@ import React, { PropsWithChildren } from "react";
 import { Card } from "@/components/ui/card";
 
 import SideBar from "./side-bar";
-import UserPopover from "./popovers/user-popover";
-import { Heading1, Heading2, Heading4 } from "./ui/typography";
+import UserPopover from "../popovers/user-popover";
+import { Heading1, Heading2, Heading4 } from "../ui/typography";
 import { Copyright } from "lucide-react";
 
 // screen container 
 interface ContainerProps extends PropsWithChildren {
     title: string;
     headerComponent?: React.ReactNode;
-    subtitle?: string;
+    subtitle?: string | React.ReactNode;
 }
 const Container: React.FC<ContainerProps> = ({
     title, headerComponent, subtitle, children
