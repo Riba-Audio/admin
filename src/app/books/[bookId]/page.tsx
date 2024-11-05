@@ -64,6 +64,7 @@ export default function Page({ params }: { params: { bookId: string } }) {
     return (
         <Container
             title={book?.title || "New Book"}
+            backPage={true}
         >
             <Card className="px-3 py-5 my-3 flex flex-col lg:flex-row gap-5 items-start">
                 <Banner
@@ -165,6 +166,8 @@ const Details = (
                                 setBlurb={setBlurb}
                                 amount={amount}
                                 setAmount={setAmount}
+                                category={category}
+                                setCategory={setCategory}
                             />
                         </div>
                         <Heading2>{title}</Heading2>
@@ -200,6 +203,8 @@ const Details = (
                             setInfo={setInfo}
                             blurb={blurb}
                             setBlurb={setBlurb}
+                            category={category}
+                            setCategory={setCategory}
                         />
                     </>
                 )

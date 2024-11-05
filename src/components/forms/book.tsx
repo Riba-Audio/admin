@@ -6,6 +6,7 @@ import { BookInfoType } from "../data-columns/books";
 import { Button } from "../ui/button";
 import CalendarPopover from "../popovers/calendar-popover";
 import { Heading4 } from "../ui/typography";
+import Combobox, { ComboType } from "../utils/combo-box";
 
 interface BookFormProps {
     id?: string; 
@@ -19,18 +20,23 @@ interface BookFormProps {
     setBlurb: React.Dispatch<string>; 
     amount?: number; 
     setAmount?: React.Dispatch<number>; 
+    category: string; 
+    setCategory: React.Dispatch<string>; 
 };
 
 const BookForm: React.FC<BookFormProps> = (
     {
         id, title, setTitle, voice, setVoice, 
         info, setInfo, blurb, setBlurb,
-        amount, setAmount
+        amount, setAmount, category, setCategory
     }
 ) => {
     const [author, setAuthor] = React.useState<string>(info?.author || ""); 
     const [pages, setPages] = React.useState<number>(info?.pages || 0); 
     const [published, setPublished] = React.useState<Date | undefined>(info?.published ? new Date(info.published): undefined); 
+
+    const [categories, setCategories] = React.useState<ComboType[]>([]);
+    const [voices, setVoices] = React.useState<ComboType[]>([]); 
 
     React.useEffect(() => {
         if (!published) return; 
@@ -54,7 +60,24 @@ const BookForm: React.FC<BookFormProps> = (
                     setInfo(updatedInfo)
                 }}
             />
+            {/* voice */}
+            <Heading4 className="text-sm lg:text-md mt-2">Voice</Heading4>
+            <Combobox 
+                title="voice"
+                value={voice}
+                values={voices}
+                setValue={setVoice}
+            />
             <div className="flex gap-2 items-center">
+                <div>
+                    <Heading4 className="text-sm lg:text-md my-2">Category</Heading4>
+                    <Combobox 
+                        title="category"
+                        values={categories}
+                        value={category}
+                        setValue={setCategory}
+                    />
+                </div>
                 <div>
                     <AppInput 
                         label="Pages"
@@ -97,3 +120,12 @@ const BookForm: React.FC<BookFormProps> = (
 };
 
 export default BookForm; 
+
+
+// import ReactAudioPlayer from 'react-audio-player';
+// //...
+// <ReactAudioPlayer
+//   src="my_audio_file.ogg"
+//   autoPlay
+//   controls
+// />

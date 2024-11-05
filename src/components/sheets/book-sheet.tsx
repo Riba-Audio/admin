@@ -16,6 +16,8 @@ interface BookFormSheetProps {
     setBlurb: React.Dispatch<string>;
     amount?: number;
     setAmount?: React.Dispatch<number>;
+    category: string;
+    setCategory: React.Dispatch<string>;
 };
 
 
@@ -23,7 +25,7 @@ const BookFormSheet: React.FC<BookFormSheetProps> = (
     {
         id, title, setTitle, voice,
         setVoice, info, setInfo, blurb,
-        setBlurb, amount, setAmount
+        setBlurb, amount, setAmount, category, setCategory
     }
 ) => {
 
@@ -48,6 +50,8 @@ const BookFormSheet: React.FC<BookFormSheetProps> = (
                 setBlurb={setBlurb}
                 amount={amount}
                 setAmount={setAmount}
+                category={category}
+                setCategory={setCategory}
             />
         </SheetContainer>
     )
