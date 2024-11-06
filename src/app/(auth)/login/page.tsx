@@ -7,16 +7,68 @@ import { Card } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import {  Heading2 } from "@/components/ui/typography";
 import { Logo } from "@/components/utils/side-bar";
+import { validateEmail } from "@/utils/validation";
 import { Eye, EyeOff, Lock, Mail } from "lucide-react";
 import { useTheme } from "next-themes";
 import Link from "next/link";
 import React from "react";
+import {createToast} from '@/utils/toast';
+import { login } from "@/auth/api-calls";
+import { useSignIn, useAuthUser } from "@/auth/authHooks";
+import { useRouter } from "next/navigation";
 
 export default function Page() {
-
+    const [mounted, setMounted] = React.useState<boolean>(false); 
     const [email, setEmail] = React.useState<string>("");
     const [password, setPassword] = React.useState<string>("");
+    const [loading, setLoading] = React.useState<boolean>(false)
     const theme: any = useTheme().theme ?? "light";
+    const signIn = useSignIn(); 
+    const {push} = useRouter(); 
+    const auth = useAuthUser(); 
+
+    const user = auth(); 
+
+    React.useEffect(() => setMounted(true), [])
+
+    React.useEffect(() => {
+        if (!mounted || !user) return; 
+        if (user) {
+            createToast("success", "Welcome back!");
+            push("/")
+        }
+    }, [user, mounted])
+
+    const handleLogin = async () => {
+        if (!validateEmail(email)) {
+            createToast("error", "Invalid email!");
+            return; 
+        }
+
+        if (!password) {
+            createToast("error", "Provide password!");
+            return; 
+        }
+
+        setLoading(true); 
+
+        let res = await login({email, password}, true);
+        console.log(res);
+        if (res) {
+            createToast("success", "Login successfull!"); 
+            signIn({
+                token: res.token, 
+                expiresIn: 60 * 60 * 1000, 
+                tokenType: 'Bearer',
+                authState: res.user, 
+                 
+            }); 
+            push("/")
+        }
+
+        setLoading(false); 
+
+    }
 
     return (
         <main className="flex items-center justify-center flex-1 p-2">
@@ -29,13 +81,17 @@ export default function Page() {
                 <Email
                     value={email}
                     setValue={setEmail}
-
+                    disabled={loading}
                 />
                 <Password
                     value={password}
                     setValue={setPassword}
+                    disabled={loading}
                 />
-                <Button>
+                <Button
+                    disabled={loading}
+                    onClick={handleLogin}
+                >
                     Login
                 </Button>
                 <Separator />
@@ -46,10 +102,11 @@ export default function Page() {
 };
 
 export const Email = (
-    { value, setValue }:
+    { value, setValue, disabled }:
         {
             value: string;
             setValue: React.Dispatch<string>;
+            disabled: boolean; 
         }
 ) => {
 
@@ -60,14 +117,16 @@ export const Email = (
             setValue={setValue}
             placeholder={"user@domain.com"}
             icon={<Mail size={18} />}
+            disabled={disabled}
         />
     )
 }
 export const Password = (
-    { value, setValue }:
+    { value, setValue, disabled }:
         {
             value: string;
             setValue: React.Dispatch<string>;
+            disabled: boolean; 
         }
 ) => {
     const [showPassword, setShowPassword] = React.useState<boolean>(false);
@@ -85,6 +144,7 @@ export const Password = (
             button={
                 <Button variant={"ghost"} onClick={() => setShowPassword(!showPassword)}>{!showPassword ? <Eye size={18} /> : <EyeOff size={18} />}</Button>
             }
+            disabled={disabled}
         />
     )
 }

@@ -7,6 +7,7 @@ import AuthProvider from "@/auth/auth-provider";
 
 import { ThemeProvider } from "@/providers/theme-provider";
 import { ToasterProvider } from "@/providers/toast-provider";
+import SideBar from "@/components/utils/side-bar";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -33,6 +34,7 @@ export default function RootLayout({
                 authType='cookie'
                 authName='_auth'
           >
+            <SideBar />
             {children}
           </AuthProvider>
           <ToasterProvider />

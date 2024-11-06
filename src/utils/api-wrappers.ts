@@ -67,8 +67,8 @@ const handleAuthErr = (err: any, log: boolean = false) => {
     // by removing the user details and prompting for login
     if (code === 403 || code === 401) {
       let currentUrl = window ? window?.location.href: null; 
-      if (!currentUrl?.includes("/auth/register")) {
-        window.location.assign("/auth/login")
+      if (!currentUrl?.includes("/register")) {
+        window.location.assign("/login")
         
         removeCookie("_auth"); 
         removeCookie("_auth_state")

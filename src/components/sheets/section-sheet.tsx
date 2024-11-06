@@ -1,4 +1,4 @@
-import { SectionType } from "@/app/books/[bookId]/page";
+import { SectionType } from "@/app/(rest)/books/[bookId]/page";
 import React from "react";
 import SheetContainer from "./container";
 import { Plus, SquarePen } from "lucide-react";
