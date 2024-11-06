@@ -15,9 +15,9 @@ export default function ProtectedLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-    const [loading, setLoading] = React.useState<boolean>(false);
+    const [loading, setLoading] = React.useState<boolean>(true);
     const [mounted, setMounted] = React.useState<boolean>(false);
-    const [loggedIn, setLoggedIn] = React.useState<boolean>(true); 
+    const [loggedIn, setLoggedIn] = React.useState<boolean>(false); 
 
     const auth = useAuthUser(); 
     const user = auth(); 

@@ -8,19 +8,36 @@ import { Heading3, Paragraph } from "@/components/ui/typography";
 import { Button } from "@/components/ui/button";
 import { Plus } from "lucide-react";
 import AddButton from "@/components/utils/add";
+import { getCategories } from "@/lib/api-calls/categories";
+import { useCustomEffect } from "@/hooks/useEffect";
 
 
 export default function Page() {
     const [count, setCount] = React.useState<number>(1);
-    const [categories, setCategories] = React.useState<string[]>([...dummy_categories]);
+    const [categories, setCategories] = React.useState<string[]>([]);
     const [loading, setLoading] = React.useState<boolean>(false);
+    const [mounted, setMounted] = React.useState<boolean>(false);
 
+    React.useEffect(() => setMounted(true), []); 
 
+    const fetchCategories = async () => {
+        if (!mounted) return; 
+
+        setLoading(true);
+        let res = await getCategories(); 
+        if (res) {
+            setCount(res.count)
+            setCategories(res.docs)
+        }
+        setLoading(false); 
+    };
+
+    useCustomEffect(fetchCategories, [mounted]); 
 
     return (
         <Container 
             title="Categories" 
-            subtitle={`Total - 50 categories`}
+            subtitle={`Total - ${count} categories`}
             headerComponent={
                 <AddButton>
                     <Button className="items-center gap-2 rounded-full" size="sm">
@@ -53,26 +70,4 @@ export default function Page() {
         </Container>
     )
 };
-
-const dummy_categories: string[] = [
-    "Fiction",
-    "Non-Fiction",
-    "Mystery",
-    "Science Fiction",
-    "Fantasy",
-    "Biography",
-    "Historical Fiction",
-    "Romance",
-    "Self-Help",
-    "Health & Wellness",
-    "Children's",
-    "Young Adult",
-    "Classic Literature",
-    "Thriller",
-    "Poetry",
-    "Graphic Novels",
-    "Cookbooks",
-    "Travel",
-    "Science",
-    "Religion & Spirituality"
-];
+ 

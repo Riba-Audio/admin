@@ -11,21 +11,41 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { DataTable } from "@/components/ui/data-table";
 import { useRouter } from "next/navigation";
+import useMounted from "@/hooks/useMounted";
+import { getBooks } from "@/lib/api-calls/books";
+import { useCustomEffect } from "@/hooks/useEffect";
 
 
 export default function Page() {
     const {push} = useRouter(); 
+     
     const [loading, setLoading] = React.useState<boolean>(true);
-    const [books, setBooks] = React.useState<BookType[]>([...dummy_books]); 
+    const [books, setBooks] = React.useState<BookType[]>([]); 
     const [count, setCount] = React.useState<number>(0); 
 
+    const mounted = useMounted(); 
+
     const [search, setSearch] = React.useState<string>(""); 
+
+    const fetchBooks = async () => {
+        if (!mounted) return; 
+        setLoading(true)
+        let res = await getBooks(0); 
+        
+        if (res) {
+            setBooks(res.docs);
+            setCount(res.count); 
+        }
+        setLoading(false)
+    }
+
+    useCustomEffect(fetchBooks, [mounted])
 
     return (
         
         <Container 
             title="Books" 
-            subtitle="Found - 254 books"
+            subtitle={`Found - ${count} books`}
             headerComponent={
                 <AddButton>
                     <AppInput 

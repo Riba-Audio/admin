@@ -20,6 +20,9 @@ import BookForm from "@/components/forms/book";
 import { images } from "@/assets";
 import BookFormSheet from "@/components/sheets/book-sheet";
 import SectionSheet from "@/components/sheets/section-sheet";
+import useMounted from "@/hooks/useMounted";
+import { getSingleBook } from "@/lib/api-calls/books";
+import { useCustomEffect } from "@/hooks/useEffect";
 
 export type SectionType = {
     title: string;
@@ -50,52 +53,87 @@ export type BookType = {
 }
 
 export default function Page({ params }: { params: { bookId: string } }) {
-    const book: any = dummy_book;
+    const [book, setBook] = React.useState<BookType>()
+    const [loading, setLoading] = React.useState<boolean>(false); 
 
-    const [id, setId] = React.useState<string | undefined>(book?.id || undefined)
-    const [title, setTitle] = React.useState<string>(book?.title || "")
-    const [blurb, setBlurb] = React.useState<string>(book?.blurb || "");
-    const [category, setCategory] = React.useState<string>(book?.category || "");
-    const [info, setInfo] = React.useState<BookInfoType | undefined>(book?.info || undefined);
-    const [amount, setAmount] = React.useState<number>(book?.amount || 0);
-    const [voice, setVoice] = React.useState<string>(book?.voice || ""); 
-    const [sections, setSections] = React.useState<SectionType[]>(book?.sections || [])
+    const [id, setId] = React.useState<string | undefined>(undefined)
+    const [title, setTitle] = React.useState<string>("")
+    const [blurb, setBlurb] = React.useState<string>("");
+    const [category, setCategory] = React.useState<string>("");
+    const [info, setInfo] = React.useState<BookInfoType | undefined>(undefined);
+    const [amount, setAmount] = React.useState<number>(0);
+    const [voice, setVoice] = React.useState<string>(""); 
+    const [sections, setSections] = React.useState<SectionType[]>([])
     
+    const mounted = useMounted(); 
+
+    const fetchBook = async () => {
+        if (!mounted || params.bookId === "new") return; 
+        setLoading(true);
+        let res = await getSingleBook(params.bookId); 
+        if (res) {
+            setBook(res);
+            setId(res.id); 
+            setTitle(res.title);
+            setBlurb(res.blurb);
+            setCategory(res.category);
+            setInfo(res.info);
+            setAmount(res.amount);
+            setVoice(res.voice); 
+            setSections(res.sections);
+        };
+        setLoading(false); 
+    };
+
+    useCustomEffect(fetchBook, [mounted])
     return (
         <Container
-            title={book?.title || "New Book"}
+            title={loading ? "Loading...": book?.title || "New Book"}
             backPage={true}
         >
-            <Card className="px-3 py-5 my-3 flex flex-col lg:flex-row gap-5 items-start">
-                <Banner
-                    info={info}
-                    setInfo={setInfo}
-                    title={title}
-                />
-                <Details
-                    id={id}
-                    title={title}
-                    setTitle={setTitle}
-                    listed={book?.listed || false}
-                    info={info}
-                    setInfo={setInfo}
-                    category={category}
-                    setCategory={setCategory}
-                    amount={amount}
-                    setAmount={setAmount}
-                    rating={book?.ratingsAverage}
-                    ratingsCount={book?.ratingsQuantity}
-                    views={book?.views || 0}
-                     
-                    blurb={blurb}
-                    setBlurb={setBlurb}
-                    voice={voice}
-                    setVoice={setVoice}
-                    duration={book?.duration || 0}
+            {
+                loading && (
+                    <Card className="w-full h-[60vh] flex items-center justify-center">
+                        <Heading4>Loading...</Heading4>
+                    </Card>
+                )
+            }
+            {
+                !loading && (
+                    <>
+                        <Card className="px-3 py-5 my-3 flex flex-col lg:flex-row gap-5 items-start">
+                            <Banner
+                                info={info}
+                                setInfo={setInfo}
+                                title={title}
+                            />
+                            <Details
+                                id={id}
+                                title={title}
+                                setTitle={setTitle}
+                                listed={book?.listed || false}
+                                info={info}
+                                setInfo={setInfo}
+                                category={category}
+                                setCategory={setCategory}
+                                amount={amount}
+                                setAmount={setAmount}
+                                rating={book?.ratingsAverage || 5}
+                                ratingsCount={book?.ratingsQuantity || 0}
+                                views={book?.views || 0}
+                                
+                                blurb={blurb}
+                                setBlurb={setBlurb}
+                                voice={voice}
+                                setVoice={setVoice}
+                                duration={book?.duration || 0}
 
-                />
-            </Card>
-            <Sections id={id} sections={sections} setSections={setSections}/>
+                            />
+                        </Card>
+                        <Sections id={id} sections={sections} setSections={setSections}/>
+                    </>
+                )
+            }
         </Container>
     )
 }
