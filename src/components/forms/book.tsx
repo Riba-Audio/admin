@@ -26,13 +26,14 @@ interface BookFormProps {
     setAmount?: React.Dispatch<number>; 
     category: string; 
     setCategory: React.Dispatch<string>; 
+    loading?: boolean; 
 };
 
 const BookForm: React.FC<BookFormProps> = (
     {
         id, title, setTitle, voice, setVoice, 
         info, setInfo, blurb, setBlurb,
-        amount, setAmount, category, setCategory
+        amount, setAmount, category, setCategory, loading
     }
 ) => {
     const [author, setAuthor] = React.useState<string>(info?.author || ""); 
@@ -70,6 +71,7 @@ const BookForm: React.FC<BookFormProps> = (
                 label="Book Title"
                 value={title}
                 setValue={setTitle}
+                disabled={loading}
             />
             <AppInput 
                 label="Book Author"
@@ -79,6 +81,8 @@ const BookForm: React.FC<BookFormProps> = (
                     let updatedInfo: any = {...info, author: str}; 
                     setInfo(updatedInfo)
                 }}
+                disabled={loading}
+
             />
             {/* voice */}
             <Heading4 className="text-sm lg:text-md mt-2">Voice</Heading4>
@@ -90,6 +94,7 @@ const BookForm: React.FC<BookFormProps> = (
                         values={voices}
                         setValue={setVoice}
                         height="h-[40vh]"
+                        
                     />
                 )
             }
@@ -114,6 +119,8 @@ const BookForm: React.FC<BookFormProps> = (
                             let updatedInfo: any = {...info, pages: Number(str)}
                             setInfo(updatedInfo)
                         }}
+                        disabled={loading}
+
                     />
                 </div>
                 <div>
@@ -121,6 +128,7 @@ const BookForm: React.FC<BookFormProps> = (
                     <CalendarPopover 
                         date={published}
                         setDate={setPublished}
+                        
                     />
                 </div>
             </div>
@@ -131,6 +139,8 @@ const BookForm: React.FC<BookFormProps> = (
                         value={amount}
                         type="number"
                         setValue={setAmount}
+                        disabled={loading}
+
                     />
                 )
             }
@@ -140,6 +150,8 @@ const BookForm: React.FC<BookFormProps> = (
                 setValue={setBlurb}
                 textarea={true}
                 cls="h-[25vh]"
+                disabled={loading}
+
             />
         </>
     )

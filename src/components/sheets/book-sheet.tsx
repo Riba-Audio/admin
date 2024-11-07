@@ -2,6 +2,7 @@ import { SquarePen } from "lucide-react";
 import { BookInfoType } from "../data-columns/books";
 import SheetContainer from "./container";
 import BookForm from "../forms/book";
+import { cn } from "@/lib/utils";
 
 
 interface BookFormSheetProps {
@@ -18,6 +19,7 @@ interface BookFormSheetProps {
     setAmount?: React.Dispatch<number>;
     category: string;
     setCategory: React.Dispatch<string>;
+    loading: boolean; 
 };
 
 
@@ -25,14 +27,17 @@ const BookFormSheet: React.FC<BookFormSheetProps> = (
     {
         id, title, setTitle, voice,
         setVoice, info, setInfo, blurb,
-        setBlurb, amount, setAmount, category, setCategory
+        setBlurb, amount, setAmount, category, setCategory, loading
     }
 ) => {
 
     return (
         <SheetContainer
             trigger={
-                <span className="block w-8 h-8 p-2 cursor-pointer hover:text-secondary-color hover:bg-secondary">
+                <span 
+                    className={cn(loading ? "cursor-not-allowed": "cursor-pointer hover:text-secondary-color hover:bg-secondary", "block w-8 h-8 p-2" )}
+                    onClick={loading ? (e) =>  {e.preventDefault(); e.stopPropagation()}: () => {}}
+                >
                     <SquarePen size={18} />
                 </span>
             }

@@ -95,6 +95,7 @@ export const columns: ColumnDef<BookType>[] = [
     {
         accessorKey: "category",
         header: "Category",
+        cell: (({ row }) => (<span className="capitalize">{row.getValue("category")}</span>))
     },
     {
         accessorKey: "sections",

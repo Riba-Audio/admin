@@ -63,7 +63,7 @@ const Combobox: React.FC<ComboboxProps> = ({title, values, value, setValue, widt
                   className="w-full"
                   value={item.value}
                   onSelect={(currentValue: string) => {
-                    setValue(handleToLowerCase(currentValue) === handleToLowerCase(value || "") ? "" : handleToLowerCase(currentValue))
+                    setValue(handleToLowerCase(currentValue) === handleToLowerCase(value || "") ? "" : currentValue)
                     setOpen(false)
                   }}
                 >

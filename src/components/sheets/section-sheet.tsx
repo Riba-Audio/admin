@@ -17,11 +17,12 @@ interface SectionSheetProps {
     section?: SectionType;
     sections: SectionType[];
     setSections: React.Dispatch<SectionType[]>;
+    loading: boolean; 
 };
 
 
 const SectionSheet: React.FC<SectionSheetProps> = ({
-    id, small, section, sections, setSections
+    id, small, section, sections, setSections, loading
 }) => {
     const [title, setTitle] = React.useState<string>(section?.title || "");
     const [text, setText] = React.useState<string>(section?.text || "");
@@ -29,7 +30,7 @@ const SectionSheet: React.FC<SectionSheetProps> = ({
     const handleSection = (e: any) => {
         // validation
         if (section) {
-            let confirm = sections.filter(sec => sec.title === section.title); 
+             
             if (section.processing) {
                 createToast("error", "Section is being processed!");
                 return; 
@@ -78,7 +79,10 @@ const SectionSheet: React.FC<SectionSheetProps> = ({
         <SheetContainer
             title={title}
             trigger={
-                <span className={cn(id ? " w-8 h-8 p-2 hover:bg-secondary": "px-3 py-1 rounded-full bg-secondary", "duration-700 flex gap-2 items-center justify-center cursor-pointer hover:text-secondary-color ")}>
+                <span 
+                    className={cn(loading ? "cursor-not-allowed": id ? " w-8 h-8 p-2 hover:bg-secondary": "px-3 py-1 rounded-full bg-secondary", "duration-700 flex gap-2 items-center justify-center cursor-pointer hover:text-secondary-color ")}
+                    onClick={loading ? (e) =>  {e.preventDefault(); e.stopPropagation()}: () => {}}
+                >
                     {
                         (small) ? <SquarePen size={18} /> : (
                             <>
