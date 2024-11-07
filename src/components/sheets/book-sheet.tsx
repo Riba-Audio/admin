@@ -37,6 +37,7 @@ const BookFormSheet: React.FC<BookFormSheetProps> = (
                 </span>
             }
             width="min-w-[60vw]"
+            title={title}
         >
             <BookForm
                 id={id}

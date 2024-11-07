@@ -35,7 +35,7 @@ interface ComboboxProps {
 const Combobox: React.FC<ComboboxProps> = ({title, values, value, setValue, width, height}) => {
   const [open, setOpen] = React.useState(false);
   
-
+  const handleToLowerCase = (val: string) => val.toLowerCase(); 
   return (
     <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger asChild>
@@ -46,7 +46,7 @@ const Combobox: React.FC<ComboboxProps> = ({title, values, value, setValue, widt
           className={cn(width ? width: "w-[200px]", "justify-between bg-transparent border border-secondary")}
         >
           {value
-            ? values.find((item) => item.value.toLowerCase() === value)?.label
+            ? values.find((item) => handleToLowerCase(item.value) === handleToLowerCase(value))?.label
             : `Select ${title}...`}
           <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
         </Button>
@@ -63,14 +63,14 @@ const Combobox: React.FC<ComboboxProps> = ({title, values, value, setValue, widt
                   className="w-full"
                   value={item.value}
                   onSelect={(currentValue: string) => {
-                    setValue(currentValue.toLowerCase() === value ? "" : currentValue)
+                    setValue(handleToLowerCase(currentValue) === handleToLowerCase(value || "") ? "" : handleToLowerCase(currentValue))
                     setOpen(false)
                   }}
                 >
                   <Check
                     className={cn(
                       "mr-2 h-4 w-4",
-                      value === item.value.toLowerCase() ? "opacity-100" : "opacity-0"
+                      handleToLowerCase(value || "") === handleToLowerCase(item.value) ? "opacity-100" : "opacity-0"
                     )}
                   />
                   {item.label}

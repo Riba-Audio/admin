@@ -9,6 +9,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { getUser } from "@/lib/api-calls/user";
 import { useCustomEffect } from "@/hooks/useEffect";
 import { getCookie, setCookie } from "@/helpers/cookies";
+import ConfirmVoices from "@/components/utils/load-voices";
 
 export default function ProtectedLayout({
     children, 
@@ -77,6 +78,7 @@ export default function ProtectedLayout({
             {
                 !loading && loggedIn && (
                     <>
+                        <ConfirmVoices />
                         {children}
                     </>
                 )
@@ -84,6 +86,7 @@ export default function ProtectedLayout({
             {
                 !loading && !loggedIn && (
                     <main className="flex-1 flex">
+                        
                         <Card className="flex-1 flex flex-col gap-1 p-2">
                             <Heading3 className="text-sm lg:text-md my-2">You are not authorized to access the page!</Heading3>
                             <Link href="/login" className="text-sm lg:text-md hover:text-active-color">Click here to log in.</Link>

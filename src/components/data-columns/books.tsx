@@ -42,13 +42,13 @@ export const BookBanner = ({src, title}: {src: string, title: string}) => (
     <span
         className="flex justify-center w-[100px] -mr-8"
     >
-        <span className="w-[100px] h-[80px] relative border-gray-500">
+        <span className="w-[100px] h-[80px] relative border-gray-500 overflow-hidden">
             <AppImage 
                 alt={title}
                 title={title}
-                src={process.env.NODE_ENV == "development" ? images.dummy_book_image: src}
+                src={src}
                 fill
-                nonBlur={true}
+                // nonBlur={true}
             />
         </span>
     </span>

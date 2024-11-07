@@ -29,9 +29,9 @@ export type SectionType = {
     text: string;
     processed: boolean;
     processing?: boolean;
-    duration: number;
-    file_key: string;
-    size: number;
+    duration?: number;
+    file_key?: string;
+    size?: number;
 }
 export type BookType = {
     id: string;
@@ -143,15 +143,14 @@ export default function Page({ params }: { params: { bookId: string } }) {
 const Banner = ({ title, info, setInfo }: { title?: string, info: BookInfoType | undefined, setInfo: React.Dispatch<BookInfoType | undefined> }) => {
     return (
         <div className="w-[25%] flex flex-col items-center">
-            <div className="w-full h-[50vh] relative">
+            <Card className="w-full h-[50vh] relative overflow-hidden">
                 <AppImage 
                     src={info?.banner || images.placeholder_img}
                     title={title || "New Book"}
                     alt={title || "New Book"}
                     fill
-                    nonBlur={true}
                 />
-            </div>
+            </Card>
             <ImageUpload 
                 text={`${info?.banner ? "Edit " : "Add "} Banner`}
                 onChange={(src) => {
@@ -281,6 +280,7 @@ const Sections = (
                     sections.map((section, index) => (
                         <Section 
                             id={id}
+                            
                             section={section}
                             sections={sections}
                             setSections={setSections}
@@ -307,10 +307,11 @@ const Section = (
     return (
         <div className="flex flex-col gap-3 p-3 border rounded-md">
             <div className="flex justify-between items-center">
-                <Badge className={cn(`${section.processed ? "bg-green-500": "bg-transparent"}`)}>
+                <Badge className={cn(`${section.processed ? "bg-green-500": "bg-gray-500"}`)}>
                     {section.processing ? "processing": section.processed ? "processed": "pending"}
                 </Badge>
                 <SectionSheet 
+                    small={true}
                     id={id}
                     section={section}
                     sections={sections}
@@ -321,7 +322,7 @@ const Section = (
             {
                 !section.text && (
                     <>  
-                        <Paragraph>{formatBytes(section.size)} | {formatDuration(section.duration)}</Paragraph>
+                        <Paragraph>{formatBytes(section.size || 0)} | {formatDuration(section.duration || 0)}</Paragraph>
                         <Button
                             size="sm"
                             className="w-fit rounded-full"
@@ -340,142 +341,4 @@ const Section = (
             }
         </div>
     )
-}
- 
-
-const dummy_book: BookType = {
-    "id": "6593ad37ed178e8dcaf40d7f",
-    "listed": true,
-    "category": "Self-help",
-    "title": "Ikigai: The Japanese Secret to a Long and Happy Life",
-    "info": {
-        "author": "Héctor García and Francesc Miralles ",
-        "banner": "https://res.cloudinary.com/dyo0ezwgs/image/upload/v1703047785/audio-books/n3lb0kq5txwlzlliucai.jpg",
-        "pages": 208,
-        "published": "2017-08-17"
-    },
-    "sections": [
-        {
-            "title": "Sample",
-            "text": "",
-            "processed": true,
-            "file_key": "audio-books/self-help/ikigai:-the-japanese-secret-to-a-long-and-happy-life-1703048932099/sample.wav",
-            "duration": 0.6784,
-            "size": 2133050
-        },
-        {
-            "title": "Epigraph",
-            "text": "",
-            "processed": true,
-            "file_key": "audio-books/self-help/ikigai:-the-japanese-secret-to-a-long-and-happy-life-1703048932099/epigraph.wav",
-            "duration": 0.3703166666666667,
-            "size": 2133050
-        },
-        {
-            "title": "Prologue",
-            "text": "",
-            "processed": true,
-            "file_key": "audio-books/self-help/ikigai:-the-japanese-secret-to-a-long-and-happy-life-1703048932099/prologue.wav",
-            "duration": 5.10435,
-            "size": 29401146
-        },
-        {
-            "title": "I IKIGAI",
-            "text": "",
-            "processed": true,
-            "file_key": "audio-books/self-help/ikigai:-the-japanese-secret-to-a-long-and-happy-life-1703048932099/i-ikigai.wav",
-            "duration": 10.220083333333333,
-            "size": 58867770
-        },
-        {
-            "title": "II ANTIAGING SECRETS",
-            "text": "",
-            "processed": true,
-            "file_key": "audio-books/self-help/ikigai:-the-japanese-secret-to-a-long-and-happy-life-1703048932099/ii-antiaging-secrets.wav",
-            "duration": 19.245333333333335,
-            "size": 110853178
-        },
-        {
-            "title": "III FROM LOGOTHERAPY TO IKIGAI",
-            "text": "",
-            "processed": true,
-            "file_key": "audio-books/self-help/ikigai:-the-japanese-secret-to-a-long-and-happy-life-1703048932099/iii-from-logotherapy-to-ikigai.wav",
-            "duration": 19.94205,
-            "size": 114866234
-        },
-        {
-            "title": "IV FIND FLOW IN EVERYTHING YOU DO",
-            "text": "",
-            "processed": true,
-            "file_key": "audio-books/self-help/ikigai:-the-japanese-secret-to-a-long-and-happy-life-1703048932099/iv-find-flow-in-everything-you-do.wav",
-            "duration": 44.126216666666664,
-            "size": 254167098
-        },
-        {
-            "title": "V MASTERS OF LONGEVITY",
-            "text": "",
-            "processed": true,
-            "file_key": "audio-books/self-help/ikigai:-the-japanese-secret-to-a-long-and-happy-life-1703048932099/v-masters-of-longevity.wav",
-            "duration": 13.910216666666667,
-            "size": 80122938
-        },
-        {
-            "title": "VI LESSONS FROM JAPAN’S CENTENARIANS",
-            "text": "",
-            "processed": true,
-            "file_key": "audio-books/self-help/ikigai:-the-japanese-secret-to-a-long-and-happy-life-1703048932099/vi-lessons-from-japan’s-centenarians.wav",
-            "duration": 19.283549999999998,
-            "size": 111073338
-        },
-        {
-            "title": "VII THE IKIGAI DIET",
-            "text": "",
-            "processed": true,
-            "file_key": "audio-books/self-help/ikigai:-the-japanese-secret-to-a-long-and-happy-life-1703048932099/vii-the-ikigai-diet.wav",
-            "duration": 14.7408,
-            "size": 84907066
-        },
-        {
-            "title": "VII GENTLE MOVEMENTS, LONGER LIFE",
-            "text": "",
-            "processed": true,
-            "file_key": "audio-books/self-help/ikigai:-the-japanese-secret-to-a-long-and-happy-life-1703048932099/vii-gentle-movements,-longer-life.wav",
-            "duration": 24.483549999999997,
-            "size": 141025338
-        },
-        {
-            "title": "IX RESILIENCE AND WABI-SABI",
-            "text": "",
-            "processed": true,
-            "file_key": "audio-books/self-help/ikigai:-the-japanese-secret-to-a-long-and-happy-life-1703048932099/ix-resilience-and-wabi-sabi.wav",
-            "duration": 19.741683333333334,
-            "size": 113712186
-        },
-        {
-            "title": "EPILOGUE",
-            "text": "",
-            "processed": true,
-            "file_key": "audio-books/self-help/ikigai:-the-japanese-secret-to-a-long-and-happy-life-1703048932099/epilogue.wav",
-            "duration": 1.51165,
-            "size": 8707130
-        },
-        {
-            "title": "Conclusion",
-            "text": "",
-            "processed": true,
-            "file_key": "audio-books/self-help/ikigai:-the-japanese-secret-to-a-long-and-happy-life-1703048932099/conclusion.wav",
-            "duration": 4.4542166666666665,
-            "size": 25656378
-        }
-    ],
-    "blurb": "According to the Japanese, everyone has an ikigai—a reason for living. And according to the residents of the Japanese village with the world’s longest-living people, finding it is the key to a happier and longer life. Having a strong sense of ikigai—where what you love, what you’re good at, what you can get paid for, and what the world needs all overlap—means that each day is infused with meaning. It’s the reason we get up in the morning. It’s also the reason many Japanese never really retire (in fact there’s no word in Japanese that means retire in the sense it does in English): They remain active and work at what they enjoy, because they’ve found a real purpose in life—the happiness of always being busy.\n\nIn researching this book, the authors interviewed the residents of the Japanese village with the highest percentage of 100-year-olds—one of the world’s Blue Zones. Ikigai reveals the secrets to their longevity and happiness: how they eat, how they move, how they work, how they foster collaboration and community, and—their best-kept secret—how they find the ikigai that brings satisfaction to their lives. And it provides practical tools to help you discover your own ikigai. Because who doesn’t want to find happiness in every day?",
-    "amount": 130,
-    "key": "audio-books/self-help/ikigai:-the-japanese-secret-to-a-long-and-happy-life-1703048932099/",
-    "ratingsAverage": 5,
-    "ratingsQuantity": 0,
-    "slug": "ikigai:-the-japanese-secret-to-a-long-and-happy-life-1703048932099",
-    "voice": "william",
-    "createdAt": "2023-12-20T05:08:52.107Z",
-    "views": 462,
-    "duration": 197.81241666666668
 }
