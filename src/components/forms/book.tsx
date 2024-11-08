@@ -2,7 +2,6 @@
 
 import React from "react";
 import AppInput from "../common/app-input";
-import { BookInfoType } from "../data-columns/books";
 import { Button } from "../ui/button";
 import CalendarPopover from "../popovers/calendar-popover";
 import { Heading4 } from "../ui/typography";
@@ -11,6 +10,7 @@ import { getCategories } from "@/lib/api-calls/categories";
 import { useCustomEffect } from "@/hooks/useEffect";
 import useMounted from "@/hooks/useMounted";
 import { getVoices } from "@/lib/api-calls/voices";
+import { BookInfoType } from "@/types";
 
 interface BookFormProps {
     id?: string; 
