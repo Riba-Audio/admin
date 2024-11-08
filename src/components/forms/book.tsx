@@ -38,7 +38,7 @@ const BookForm: React.FC<BookFormProps> = (
 ) => {
     const [author, setAuthor] = React.useState<string>(info?.author || ""); 
     const [pages, setPages] = React.useState<number>(info?.pages || 0); 
-    const [published, setPublished] = React.useState<Date | undefined>(info?.published ? new Date(info.published): undefined); 
+    const [published, setPublished] = React.useState<string>(info?.published || ""); 
 
     const [categories, setCategories] = React.useState<ComboType[]>([]);
     const [voices, setVoices] = React.useState<ComboType[]>([]); 
@@ -124,11 +124,17 @@ const BookForm: React.FC<BookFormProps> = (
                     />
                 </div>
                 <div>
-                    <Heading4 className="text-sm lg:text-md my-2">Publishing date</Heading4>
-                    <CalendarPopover 
-                        date={published}
-                        setDate={setPublished}
-                        
+                    <AppInput 
+                        label="Published"
+                        value={published}
+                        placeholder={"2022-01-25"}
+                        setValue={setPublished}
+                        onKeyUp={(str: any) => {
+                            let updatedInfo: any = {...info, published: str}
+                            setInfo(updatedInfo)
+                        }}
+                        disabled={loading}
+
                     />
                 </div>
             </div>

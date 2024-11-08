@@ -11,14 +11,10 @@ import { Badge } from "@/components/ui/badge";
 import Rating from "@/components/utils/rating";
 import { cn } from "@/lib/utils";
 import { numberWithCommas } from "@/utils/format-numbers";
+import { BookInfoType } from "@/types";
 
 
-export type BookInfoType = {
-    author: string;
-    banner: string;
-    pages: number;
-    published: string;
-}
+
 export type BookAudioType = {
     voice: string; 
     duration: number; 
@@ -39,10 +35,8 @@ export type BookType = {
 }
 
 export const BookBanner = ({src, title}: {src: string, title: string}) => (
-    <span
-        className="flex justify-center w-[100px] -mr-8"
-    >
-        <span className="w-[100px] h-[80px] relative border-gray-500 overflow-hidden">
+     
+        <span className="-mr-8 flex w-[100px] h-[80px] relative overflow-hidden">
             <AppImage 
                 alt={title}
                 title={title}
@@ -51,7 +45,7 @@ export const BookBanner = ({src, title}: {src: string, title: string}) => (
                 // nonBlur={true}
             />
         </span>
-    </span>
+    
 );
 
  

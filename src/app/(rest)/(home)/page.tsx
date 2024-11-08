@@ -2,6 +2,11 @@ import Container from "@/components/utils/container";
 import Cards from "./components/cards";
 import { ChartComponent } from "./components/graph-container";
 import Requests from "./components/requests";
+import { generateStaticMetadata } from "@/utils/metadata";
+import { Metadata } from "next";
+
+export const metadata: Metadata = generateStaticMetadata("Dashboard", "");
+
 
 export default function Home() {
   return (

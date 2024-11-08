@@ -23,36 +23,29 @@ export default function ProtectedLayout({
     const auth = useAuthUser(); 
     const user = auth(); 
     const signOut = useSignOut(); 
+    const { push } = useRouter(); 
 
     React.useEffect(() => setMounted(true), []); 
 
-    React.useEffect(() => {
-        setLoading(true)
-        if (!mounted || !user) {
-            setLoading(false);
-            return; 
-        }; 
-        if (user && user.role) setLoggedIn(true);
-        else setLoggedIn(false)
-        setLoading(false)
-    }, [user, mounted])
-
     const fetchUser = async () => {
-        if (!mounted || !user || !user.role && !loggedIn) return;
+        if (!mounted || !user || !user.role) return;
+        setLoading(true)
         let res = await getUser(); 
         if (res) {
             let authState: any = getCookie("_auth_state"); 
 
             let updatedAuthState = {...JSON.parse(authState), ...res};
             setCookie("_auth_state", JSON.stringify(updatedAuthState));
-              
+            setLoggedIn(true);
         } else {
-            signOut()
+            setLoggedIn(false)
+            signOut();
+            push("/login")
         }
-
+        setLoading(false)
     }
 
-    useCustomEffect(fetchUser, [user, mounted, loggedIn]);
+    useCustomEffect(fetchUser, [user, mounted]);
 
     if (!mounted || loading) {
         return (
