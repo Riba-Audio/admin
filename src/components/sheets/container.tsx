@@ -1,7 +1,7 @@
 
 import { Sheet, SheetContent, SheetDescription, SheetTitle, SheetTrigger } from '../ui/sheet';
 
-const SheetContainer = ({title, trigger, children, width}: {title: string, trigger: React.ReactNode, children: React.ReactNode, width?: string}) => {
+const SheetContainer = ({title, trigger, children, width, side}: {title: string, trigger: React.ReactNode, children: React.ReactNode, width?: string, side?: "right" | "left" | "top" | "bottom"}) => {
 
     return (
         <Sheet>
@@ -12,7 +12,7 @@ const SheetContainer = ({title, trigger, children, width}: {title: string, trigg
                 {title}
             </SheetTitle>
             <SheetDescription className='hidden'/>
-            <SheetContent className={`${width && width} h-full flex flex-col`}>
+            <SheetContent className={`${width && width} h-full flex flex-col`} side={side || "right"}>
                 {children}
             </SheetContent>
         </Sheet>

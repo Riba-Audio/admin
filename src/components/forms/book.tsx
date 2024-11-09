@@ -10,7 +10,8 @@ import { getCategories } from "@/lib/api-calls/categories";
 import { useCustomEffect } from "@/hooks/useEffect";
 import useMounted from "@/hooks/useMounted";
 import { getVoices } from "@/lib/api-calls/voices";
-import { BookInfoType } from "@/types";
+import { BookInfoType, VoiceType } from "@/types";
+import ConfirmVoices  from "../utils/load-voices";
 
 interface BookFormProps {
     id?: string; 
@@ -41,7 +42,7 @@ const BookForm: React.FC<BookFormProps> = (
     const [published, setPublished] = React.useState<string>(info?.published || ""); 
 
     const [categories, setCategories] = React.useState<ComboType[]>([]);
-    const [voices, setVoices] = React.useState<ComboType[]>([]); 
+    const [voices, setVoices] = React.useState<VoiceType[]>([]); 
 
     const mounted = useMounted(); 
 
@@ -57,13 +58,13 @@ const BookForm: React.FC<BookFormProps> = (
         let res = await getCategories(); 
         if (res)  setCategories(res.docs.map((ct: string) => ({label: ct, value: ct})))
     }
-    const fetchVoices = async () => {
-        if (!mounted || id) return; 
-        let res = await getVoices(); 
-        if (res) setVoices(res.map((vc: any) => ({label: vc.title, value: vc.title}))); 
-    }
+    // const fetchVoices = async () => {
+    //     if (!mounted || id) return; 
+    //     let res = await getVoices(); 
+    //     if (res) setVoices(res.map((vc: any) => ({label: vc.title, value: vc.title}))); 
+    // }
     useCustomEffect(fetchCategories, [mounted])
-    useCustomEffect(fetchVoices, [mounted]);
+    // useCustomEffect(fetchVoices, [mounted]);
      
     return (
         <>
@@ -72,6 +73,10 @@ const BookForm: React.FC<BookFormProps> = (
                 value={title}
                 setValue={setTitle}
                 disabled={loading}
+            />
+            <ConfirmVoices 
+                voices={voices}
+                setVoices={setVoices}
             />
             <AppInput 
                 label="Book Author"
@@ -91,7 +96,7 @@ const BookForm: React.FC<BookFormProps> = (
                     <Combobox 
                         title="voice"
                         value={voice}
-                        values={voices}
+                        values={voices.map((vc: any) => ({label: vc.title, value: vc.title}))}
                         setValue={setVoice}
                         height="h-[40vh]"
                         

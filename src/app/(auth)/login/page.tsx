@@ -53,7 +53,7 @@ export default function Page() {
         setLoading(true); 
 
         let res = await login({email, password}, true);
-        console.log(res);
+        
         if (res) {
             createToast("success", "Login successfull!"); 
             signIn({

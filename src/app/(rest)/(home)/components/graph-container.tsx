@@ -69,10 +69,7 @@ export function ChartComponent({ height }: { height: string }) {
       color: "hsl(var(--chart-3))",
     },
   } satisfies ChartConfig
-
-  // console.log(chartConfig)
-  // console.log(); 
-  // console.log(chartData)
+ 
   return (
     <Card className="flex-1 rounded-md">
       <CardHeader className="flex flex-col items-stretch space-y-0 border-b p-0 sm:flex-row">

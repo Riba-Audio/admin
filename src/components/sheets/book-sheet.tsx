@@ -1,8 +1,8 @@
 import { SquarePen } from "lucide-react";
-import { BookInfoType } from "../data-columns/books";
 import SheetContainer from "./container";
 import BookForm from "../forms/book";
 import { cn } from "@/lib/utils";
+import { BookInfoType } from "@/types";
 
 
 interface BookFormSheetProps {

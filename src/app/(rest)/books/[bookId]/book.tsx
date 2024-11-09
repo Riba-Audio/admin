@@ -75,10 +75,6 @@ const Book = ({ params }: { params: { bookId: string } }) => {
                 sections.length === 0
             ) {
                  
-
-                console.log(
-                    title, info, voice, sections.length, category, blurb
-                )
                 createToast("error", "Make sure all the fields are filled");
                 return;
             }
@@ -91,7 +87,7 @@ const Book = ({ params }: { params: { bookId: string } }) => {
             setSloading(true);
 
             let book: any = { title, voice, category, blurb, ...info, sections };
-            console.log(book);
+           
             let res = await postBook(book); 
             if (res) {
                 createToast("success", "Book has been added!");
@@ -135,8 +131,6 @@ const Book = ({ params }: { params: { bookId: string } }) => {
                 setListed(false)
             }
             if (amount !== book.amount) toUpdate.amount = amount;
-
-            console.log(toUpdate);
 
             setSloading(false);
         }

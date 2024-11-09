@@ -3,13 +3,12 @@ import React from "react";
 import Link from "next/link";
 import { Card } from "@/components/ui/card";
 import {  Heading3,  Paragraph } from "@/components/ui/typography";
-import { useAuthUser, useSignIn, useSignOut} from "@/auth/authHooks";
+import { useAuthUser, useSignOut} from "@/auth/authHooks";
 import { useRouter } from "next/navigation";
 import { Skeleton } from "@/components/ui/skeleton";
 import { getUser } from "@/lib/api-calls/user";
 import { useCustomEffect } from "@/hooks/useEffect";
 import { getCookie, setCookie } from "@/helpers/cookies";
-import ConfirmVoices from "@/components/utils/load-voices";
 
 export default function ProtectedLayout({
     children, 
@@ -71,14 +70,14 @@ export default function ProtectedLayout({
             {
                 !loading && loggedIn && (
                     <>
-                        <ConfirmVoices />
+                        
                         {children}
                     </>
                 )
             }
             {
                 !loading && !loggedIn && (
-                    <main className="flex-1 flex">
+                    <main className="flex-1 flex ">
                         
                         <Card className="flex-1 flex flex-col gap-1 p-2">
                             <Heading3 className="text-sm lg:text-md my-2">You are not authorized to access the page!</Heading3>

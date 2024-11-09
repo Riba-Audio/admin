@@ -8,6 +8,7 @@ import { Heading1, Heading2, Heading4 } from "../ui/typography";
 import { ChevronLeft, Copyright } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { Button } from "../ui/button";
+import Player from "@/components/utils/player";
  
 
 type AdminType = "main";
@@ -30,10 +31,11 @@ const Container: React.FC<ContainerProps> = ({
     return (
         <>
             
-            <main className="flex-1 flex flex-col gap-1 p-2 py-0">
-                <div className="flex justify-between items-center py-2 mb-5">
+            <main className="flex-1 flex flex-col gap-1 p-2 py-0 relative">
+                <Player />
+                <div className="flex justify-between items-center py-2">
                     <div className="flex gap-2 items-center">
-                        {backPage && <Button size="icon" variant="ghost" onClick={() => back()} className="hover:bg-background"><ChevronLeft size={25}/></Button>}
+                        {backPage && <Button size="icon" variant="secondary" onClick={() => back()} className="hover:bg-background"><ChevronLeft size={25}/></Button>}
                         <div>
                             <Heading1 className="text-xl lg:text-2xl">{title}</Heading1>
                             {
@@ -50,6 +52,7 @@ const Container: React.FC<ContainerProps> = ({
                         <UserPopover />
                     </div>
                 </div>
+                
                 {headerComponent && headerComponent}
                 <div className="flex-1 overflow-auto">
                     {children}

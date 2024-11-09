@@ -23,11 +23,18 @@ export const updateVoice = async (voiceId: string, data: any) => {
 // add voice
 export const postVoice = async (data: any) => {
     let res = await postDoc(`/voices?role=admin`, data, true);
-    return res?.status === "success";
+    return res?.data;
 };
 
 // delete voice 
 export const deleteVoice = async (voiceId: string) => {
-    let res = await deleteDoc(`/voices/${voiceId}`, true);
+    let res = await deleteDoc(`/voices/${voiceId}?role=admin`, true);
     return res?.status === "success"; 
+}
+
+// get uri 
+export const getSoundURI = async (key: string) => {
+    let res = await postDoc(`/admin/uri?role=admin`, {key}, true);
+    console.log(res)
+    return res?.data || false; 
 }

@@ -9,7 +9,10 @@ import {
     SectionType, BookInfoType, BookType
 } from "./book"; 
 
+import { VoiceType } from "./voice";
+
 export type {
     ComputerStatusType, BookProcessingType, ComputerInfoType, ComputerType,
-    SectionType, BookInfoType, BookType
+    SectionType, BookInfoType, BookType,
+    VoiceType
 }

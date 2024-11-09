@@ -1,4 +1,3 @@
-import { SectionType } from "@/app/(rest)/books/[bookId]/page";
 import React from "react";
 import SheetContainer from "./container";
 import { Plus, SquarePen } from "lucide-react";
@@ -9,6 +8,7 @@ import { formatBytes, formatDuration } from "@/utils/format-numbers";
 import { Heading3, Paragraph } from "../ui/typography";
 import { Button } from "../ui/button";
 import { createToast } from "@/utils/toast";
+import { SectionType } from "@/types";
 
 
 interface SectionSheetProps {
