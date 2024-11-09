@@ -35,6 +35,5 @@ export const deleteVoice = async (voiceId: string) => {
 // get uri 
 export const getSoundURI = async (key: string) => {
     let res = await postDoc(`/admin/uri?role=admin`, {key}, true);
-    console.log(res)
     return res?.data || false; 
 }

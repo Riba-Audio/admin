@@ -32,7 +32,7 @@ const Player = () => {
                     <Card className="mr-5 p-2 mb-[7.5rem] fixed bottom-0 right-0  bg-background flex gap-2 items-center w-[400px]">
                         <div className='w-[83px] h-[83px] relative overflow-hidden'>
                             <AppImage 
-                                src={images.placeholder_img}
+                                src={track.banner || images.placeholder_img}
                                 alt="Player"
                                 title="Player"
                                 fill
@@ -41,7 +41,7 @@ const Player = () => {
                         </div>
                         <div className='flex-1'>
                             <div className="flex justify-between items-center my-1">
-                                <Heading5 className='font-bold text-xs lg:text-xs max-w-[80%] overflow-auto'>Currently playing: Title</Heading5>
+                                <Heading5 className='font-bold text-xs lg:text-xs max-w-[80%] overflow-auto'>Currently playing: {track.title}</Heading5>
                                 <span 
                                     className='cursor-pointer duration-700 hover:text-destructive'
                                     onClick={() => {
