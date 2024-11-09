@@ -29,7 +29,6 @@
     "next-cloudinary": "^6.16.0",
     "next-themes": "^0.3.0",
     "react": "^18",
-    "react-audio-player": "^0.17.0",
     "react-day-picker": "8.10.1",
     "react-dom": "^18",
     "react-simple-star-rating": "^5.1.7",
