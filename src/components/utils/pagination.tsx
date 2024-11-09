@@ -59,7 +59,7 @@ const Pagination: React.FC<PaginationProps> = (
                             pages.map((_, index) => (
                                 <Button
                                     key={index}
-                                    variant={index === (section) ? "outline": "ghost"}
+                                    variant={index === (section) ? "secondary": "ghost"}
                                     size="sm"
                                     onClick={() => handleMoveToSection(index)}
                                 >
