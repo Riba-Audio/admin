@@ -27,7 +27,13 @@ const SectionSheet: React.FC<SectionSheetProps> = ({
     const [title, setTitle] = React.useState<string>(section?.title || "");
     const [text, setText] = React.useState<string>(section?.text || "");
 
+    React.useEffect(() => {
+        if (!section) return; 
+        setText(section.text)
+        setTitle(section.title); 
+    }, [section])
     const handleSection = (e: any) => {
+        
         // validation
         if (section) {
              
@@ -52,6 +58,11 @@ const SectionSheet: React.FC<SectionSheetProps> = ({
             updatedSection = {...section};
             if (text !== section.text && section.processed) {
                 updatedSection.processed = false; 
+                updatedSection.text = text; 
+                updatedSection.title = title; 
+            } else {
+                updatedSection.text = text;
+                updatedSection.title = title; 
             }
         } 
         else updatedSection = {title, text, processed: false}; 
@@ -62,7 +73,7 @@ const SectionSheet: React.FC<SectionSheetProps> = ({
             for (let i = 0; i < sections.length; i++) {
                 let curr = sections[i];
 
-                if (curr.title === section.title) newSections.push(updatedSection);
+                if (curr.title === section?.title) newSections.push(updatedSection);
                 else newSections.push(curr)
             };
             setSections(newSections); 
@@ -72,8 +83,6 @@ const SectionSheet: React.FC<SectionSheetProps> = ({
         setText("")
         let closeButton = e.target.parentElement.parentElement.children[0]; 
         closeButton.click(); 
-        
-
     }
     return (
         <SheetContainer
@@ -119,7 +128,7 @@ const SectionSheet: React.FC<SectionSheetProps> = ({
                     placeholder={"John Kiriamiti was born in a humble neighbourhood off the coast of Kenya..."}
                     label="Text"
                     textarea={true}
-                    cls="h-[45vh]"
+                    cls="h-[50vh]"
                 />
                 <Button 
                     className="self-end min-w-[150px]"

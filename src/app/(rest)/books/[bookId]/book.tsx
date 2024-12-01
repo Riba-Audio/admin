@@ -20,7 +20,7 @@ import { images } from "@/assets";
 import BookFormSheet from "@/components/sheets/book-sheet";
 import SectionSheet from "@/components/sheets/section-sheet";
 import useMounted from "@/hooks/useMounted";
-import { getSingleBook, postBook } from "@/lib/api-calls/books";
+import { getSingleBook, postBook, updateBook } from "@/lib/api-calls/books";
 import { useCustomEffect } from "@/hooks/useEffect";
 import { createToast } from "@/utils/toast";
 import { useRouter } from "next/navigation";
@@ -67,7 +67,7 @@ const Book = ({ params }: { params: { bookId: string } }) => {
 
     useCustomEffect(fetchBook, [mounted]);
     const handlePostBook = async () => {
-        let banner = info?.banner || "https://res.cloudinary.com/dyo0ezwgs/image/upload/v1702762536/audio-books/yrsyyop4lw7yilddu7nd.jpg"; 
+        let banner = info?.banner; 
 
         if (!book) {
             // posting new book 
@@ -133,7 +133,8 @@ const Book = ({ params }: { params: { bookId: string } }) => {
                 setListed(false)
             }
             if (amount !== book.amount) toUpdate.amount = amount;
-
+            let res = await updateBook(book.id, toUpdate); 
+            if (res) createToast("success", "Update was successful!"); 
             setSloading(false);
         }
     }

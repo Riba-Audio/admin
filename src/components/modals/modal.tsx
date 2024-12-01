@@ -23,7 +23,7 @@ export const Modal: React.FC<ModalProps> = ({
     return (
         <Dialog open={isOpen} onOpenChange={onChange}>
             <DialogDescription className="hidden"/>
-            <DialogContent className={cn("max-md:max-w-[80vw]", `${width ? "max-w-[80vw]": ""}`, height)}>
+            <DialogContent className={cn("max-md:max-w-[80vw] w-[90vw]", width, height)}>
                 <DialogHeader>
                     <DialogTitle>{title}</DialogTitle>
                 </DialogHeader>

@@ -16,6 +16,7 @@ export type ComputerType = {
     id: string; 
     status: ComputerStatusType 
     title: string; 
+    email: string;
     info: ComputerInfoType;
     ngrok: string; 
     book?: BookProcessingType; 

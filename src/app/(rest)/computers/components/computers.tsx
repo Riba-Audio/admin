@@ -35,7 +35,6 @@ const Computers = () => {
     useCustomEffect(fetchComputers, [mounted])
     return (
         <>
-
             <Container
                 title="Computers"
                 subtitle={`Total - ${computers.length} computers`}
@@ -62,7 +61,7 @@ const Computers = () => {
                     loading && (
                         <div className="grid grid-cols-4 gap-2">
                             {
-                                createArray(30).map(itm => (
+                                createArray(6).map(itm => (
                                     <ComputerSkeleton key={itm} />
                                 ))
                             }
@@ -81,7 +80,7 @@ const Computers = () => {
                         <div className="grid grid-cols-4 gap-2">
                             {
                                 computers.map((comp, index) => (
-                                    <Computer key={index} {...comp} />
+                                    <Computer key={index} {...comp} computers={computers} setComputers={setComputers} />
                                 ))
                             }
                         </div>
