@@ -33,8 +33,8 @@ export function DataTable<TData, TValue>({
 
   return (
     <div className="rounded-md border py-3">
-      <Table>
-        <TableHeader >
+      <Table >
+        <TableHeader className="px-5">
           {table.getHeaderGroups().map((headerGroup) => (
             <TableRow key={headerGroup.id} >
               {headerGroup.headers.map((header) => {
@@ -58,6 +58,7 @@ export function DataTable<TData, TValue>({
               <TableRow
                 key={row.id}
                 data-state={row.getIsSelected() && "selected"}
+                className="px-5"
               >
                 {row.getVisibleCells().map((cell) => (
                   <TableCell key={cell.id}>

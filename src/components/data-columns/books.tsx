@@ -10,7 +10,7 @@ import AppImage from "@/components/common/app-image";
 import { Badge } from "@/components/ui/badge";
 import Rating from "@/components/utils/rating";
 import { cn } from "@/lib/utils";
-import { numberWithCommas } from "@/utils/format-numbers";
+import { numberWithCommas, formatDuration } from "@/utils/format-numbers";
 import { BookInfoType } from "@/types";
 
 
@@ -80,7 +80,20 @@ export const columns: ColumnDef<BookType>[] = [
             )
         })
     },
-  
+    {
+        accessorKey: "audio",
+        header: "Audio", 
+        cell: ({ row }) => {
+            let book = row.original;
+
+            return (
+                <span className="flex flex-col gap-2 max-[250px]">
+                    <span className="font-bold text-sm lg:text-md line-clamp-1">Duration: {formatDuration(book.audio.duration || 3)}</span>
+                    <span className="text-xs lg:text-xs text-gray-500 line-clamp-1 capitalize">Voice: {book.audio.voice}</span>
+                </span>
+            )
+        }
+    },
     {
         accessorKey: "amount",
         header: "Amount",

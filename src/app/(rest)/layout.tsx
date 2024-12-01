@@ -27,7 +27,10 @@ export default function ProtectedLayout({
     React.useEffect(() => setMounted(true), []); 
 
     const fetchUser = async () => {
-        if (!mounted || !user || !user.role) return;
+        if (!mounted || !user || !user.role) {
+            setLoading(false)
+            return
+        };
         setLoading(true)
         let res = await getUser(); 
         if (res) {
@@ -44,12 +47,13 @@ export default function ProtectedLayout({
         setLoading(false)
     }
 
+
     useCustomEffect(fetchUser, [user, mounted]);
 
     if (!mounted || loading) {
         return (
             <Card className="flex-1 px-2 py-2">
-                <div className="w-full flex items-center justify-between w-full">
+                <div className="flex items-center justify-between w-full">
                     <Skeleton className="h-[20px] w-[160px] rounded-lg bg-secondary"/>
                     <div className="flex gap-2">
                          

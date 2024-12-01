@@ -67,11 +67,13 @@ const Book = ({ params }: { params: { bookId: string } }) => {
 
     useCustomEffect(fetchBook, [mounted]);
     const handlePostBook = async () => {
+        let banner = info?.banner || "https://res.cloudinary.com/dyo0ezwgs/image/upload/v1702762536/audio-books/yrsyyop4lw7yilddu7nd.jpg"; 
+
         if (!book) {
             // posting new book 
             if (
                 !title || !info?.author || !voice || !category ||
-                !info.pages || !blurb || !info.published || !info.banner ||
+                !info.pages || !blurb || !info.published || !banner ||
                 sections.length === 0
             ) {
                  
@@ -86,7 +88,7 @@ const Book = ({ params }: { params: { bookId: string } }) => {
             }
             setSloading(true);
 
-            let book: any = { title, voice, category, blurb, ...info, sections };
+            let book: any = { title, voice, category, blurb, ...info, banner, sections };
            
             let res = await postBook(book); 
             if (res) {
@@ -271,7 +273,7 @@ const Details = (
                             {info?.author} |&nbsp;
                             {info?.pages} pages |&nbsp;
                             {formatDuration(duration)} |&nbsp;
-                            {dayjs(new Date(info?.published || Date.now())).format("MM, YYYY")}
+                            {dayjs(new Date(info?.published || Date.now())).format("MMM, YYYY")}
                         </Paragraph>
                         <div className="flex gap-2 items-center">
                             <Paragraph className="capitalize">{category} | </Paragraph>

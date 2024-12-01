@@ -40,7 +40,7 @@ export function formatDuration(minutes: number) {
 
     // If no hours or minutes, display 'less than a minute'
     if (formattedDuration === '') {
-        formattedDuration = 'less than a minute';
+        formattedDuration =  '< minute';
     }
 
     return formattedDuration;
