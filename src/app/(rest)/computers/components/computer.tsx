@@ -42,10 +42,10 @@ const Computer: React.FC<ComputerProps> = (
                     <span>{info.storage} | </span>
                     <span>{info.gpu}</span>
                 </Paragraph>
-                <div className="flex">
+                <div className="flex overflow-hidden gap-3">
                     <Paragraph className="flex-1 text-xs lg:text-xs">{email}</Paragraph>
-                    <Paragraph className="flex-1 text-xs lg:text-xs flex items-center gap-5">
-                        <span className="max-w-[80%] flex-1">{ngrok}</span>
+                    <Paragraph className="w-[70%] flex-1 text-xs lg:text-xs flex items-center gap-5">
+                        <span className="w-[60%] flex-1">{ngrok.slice(0, 17)}..</span>
                         <span className="cursor-pointer hover:text-secondary-color"><Copy size={16} /></span>
                     </Paragraph>
                 </div>

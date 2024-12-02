@@ -26,9 +26,8 @@ const SideBar = () => {
 
     React.useEffect(() => {setMounted(true)}, [])
 
-
     let linkClassName = (link: NavLinkType) => cn(pathname === link.href ? "bg-secondary text-secondary-color" : "", "my-1 hover:bg-secondary pl-2 py-2")
-    let sideBarClass = (expanded: boolean) => cn(expanded ? "min-w-[180px]" : "", "py-4 duration-700 z-0 relative border-r-[.3px] border-r-gray-300 bg-background flex flex-col h-full overflow-hidden")
+    let sideBarClass = (expanded: boolean) => cn(expanded ? "min-w-[180px]" : "", "py-4 duration-700 z-0 relative border-r-[.3px] border-r-background bg-background flex flex-col h-full overflow-hidden")
     if (!mounted) return <Skeleton className={sideBarClass(expandSideBar)}/>
     return (
         <section className={sideBarClass(expandSideBar)}>
