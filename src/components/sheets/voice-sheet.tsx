@@ -115,7 +115,7 @@ const Voice = (
                     </div>
                 </div>
                 <Paragraph className="text-xs lg:text-xs text-gray-500">Pointer: {voice.pointer}</Paragraph>
-                <span onClick={handlePlaySample}  className="cursor-pointer flex gap-2 items-center border hover:border-secondary-color hover:text-secondary-color duration-700 px-3 px-1 text-xs lg:text-xs self-end w-fit min-w-[100px] gap-2 items-center rounded-full">
+                <span onClick={handlePlaySample}  className="cursor-pointer flex gap-2 items-center border hover:border-secondary-color hover:text-secondary-color duration-700 text-xs lg:text-xs self-end w-fit min-w-[100px] rounded-full">
                     Add to play
                 </span>
                 <Separator />
