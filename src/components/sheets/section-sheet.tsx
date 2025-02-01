@@ -89,7 +89,7 @@ const SectionSheet: React.FC<SectionSheetProps> = ({
             title={title}
             trigger={
                 <span 
-                    className={cn(loading ? "cursor-not-allowed": id ? " w-8 h-8 p-2 hover:bg-secondary": "px-3 py-1 rounded-full bg-secondary", "duration-700 flex gap-2 items-center justify-center cursor-pointer hover:text-secondary-color ")}
+                    className={cn(loading ? "cursor-not-allowed": id ? " hover:bg-secondary": "px-3 py-1 rounded-full bg-secondary", "duration-700 flex gap-2 items-center justify-center cursor-pointer hover:text-secondary-color ")}
                     onClick={loading ? (e) =>  {e.preventDefault(); e.stopPropagation()}: () => {}}
                 >
                     {

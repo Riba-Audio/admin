@@ -13,13 +13,15 @@ interface AppLinkProps {
     target?: string;  
 }
 
+export const linkClassName = "flex items-center gap-2 text-sm lg:text-md hover:text-secondary-color duration-700"; 
+
 const AppLink: React.FC<AppLinkProps> = (
     {text, title, href, icon, afterIcon, className, target}
 ) => (
     <Link
         href={href}
         title={title}
-        className={cn("flex items-center gap-2 text-sm lg:text-md hover:text-secondary-color duration-700", className)}
+        className={cn(linkClassName, className)}
         target={target}
     >
         {icon && icon}

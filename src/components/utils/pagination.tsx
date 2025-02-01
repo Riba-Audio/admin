@@ -46,7 +46,7 @@ const Pagination: React.FC<PaginationProps> = (
     return (
         <>
             {
-                pages.length > 1 && (
+                (pages.length > 1 || page !== 0) && (
                     <div className="my-2 flex justify-center gap-2">
                         {
                             page !== 0 && (

@@ -25,6 +25,9 @@ import { useCustomEffect } from "@/hooks/useEffect";
 import { createToast } from "@/utils/toast";
 import { useRouter } from "next/navigation";
 import { BookInfoType, BookType, SectionType } from "@/types";
+import { useTheme } from "next-themes";
+import { usePlayerState } from "@/store/player";
+import { getSoundURI } from "@/lib/api-calls/voices";
 
 
 
@@ -101,6 +104,7 @@ const Book = ({ params }: { params: { bookId: string } }) => {
             let oldBook = {
                 title: book.title,
                 info: book.info,
+                voice: book.voice,
                 category: book.category,
                 blurb: book.blurb,
                 amount: book.amount,
@@ -108,7 +112,7 @@ const Book = ({ params }: { params: { bookId: string } }) => {
             };
 
             let updates: any = {
-                title, info, category, blurb, amount, sections
+                title, info, category, blurb, amount, sections, voice
             };
 
 
@@ -125,16 +129,28 @@ const Book = ({ params }: { params: { bookId: string } }) => {
 
             if (title !== book.title) toUpdate.title = title;
             if (blurb !== book.blurb) toUpdate.blurb = blurb;
+            if (voice !== book.voice) {
+                toUpdate.voice = voice
+                toUpdate.listed = false; 
+            }; 
             if (JSON.stringify(updatedInfo) !== JSON.stringify(oldInfo)) toUpdate.info = updatedInfo;
             if (category !== book.category) toUpdate.category = category;
             if (JSON.stringify(sections) !== JSON.stringify(book.sections)) {
                 toUpdate.sections = sections;
                 toUpdate.listed = false;
-                setListed(false)
+                
             }
             if (amount !== book.amount) toUpdate.amount = amount;
             let res = await updateBook(book.id, toUpdate); 
-            if (res) createToast("success", "Update was successful!"); 
+            if (res) {
+                if (
+                    JSON.stringify(sections) !== JSON.stringify(book.sections) ||
+                    voice !== book.voice
+                ) {
+                    setListed(false)
+                }
+                createToast("success", "Update was successful!");
+            } 
             setSloading(false);
         }
     }
@@ -243,14 +259,15 @@ const Details = (
             blurb: string; setBlurb: React.Dispatch<string>; handleSubmit: () => Promise<void>; loading: boolean;
         }
 ) => {
-
+    const {theme} = useTheme(); 
+ 
     return (
         <div className="flex-1 flex flex-col gap-2">
             {
                 id ? (
                     <>
                         <div className="flex justify-between items-center">
-                            <Badge className={cn(listed ? "bg-green-500" : "")}>{listed ? "Listed" : "Not Listed"}</Badge>
+                            <Badge className={cn(listed ? "bg-green-500" : "", theme === "dark" ? "text-black": "")}>{listed ? "Listed" : "Not Listed"}</Badge>
 
                             <BookFormSheet
                                 id={id}
@@ -372,8 +389,27 @@ const Section = (
             setSections: React.Dispatch<SectionType[]>;
             loading: boolean;
         }
-) => {
+) => {  
+    const [sLoading, setSLoading] = React.useState<boolean>(false); 
+    const {addTrack} = usePlayerState(); 
+    
+    const handlePlaySection = async () => {
+        if (!section.file_key) {
+            createToast("error", "Section has not been processed!")
+            return; 
+        }
+        setSLoading(true)
 
+        let uri = await getSoundURI(section.file_key); 
+
+        if (uri) {
+            addTrack({
+                title: `${section.title}`,
+                src: uri
+            })
+        }
+        setSLoading(false)
+    }
     return (
         <div className="flex flex-col gap-3 p-3 border rounded-md">
             <div className="flex justify-between items-center">
@@ -386,7 +422,7 @@ const Section = (
                     section={section}
                     sections={sections}
                     setSections={setSections}
-                    loading={loading}
+                    loading={loading || sLoading}
                 />
             </div>
             <Heading4 className="text-md lg:text-base line-clamp-1">{section.title}</Heading4>
@@ -398,7 +434,9 @@ const Section = (
                             size="sm"
                             className="w-fit rounded-full"
                             variant={"outline"}
-                            disabled={loading}
+                            disabled={loading || sLoading}
+                            onClick={handlePlaySection}
+                            
                         >
                             <Play size={18} />
                             Play

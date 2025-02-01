@@ -91,18 +91,15 @@ const BookForm: React.FC<BookFormProps> = (
             />
             {/* voice */}
             <Heading4 className="text-sm lg:text-md mt-2">Voice</Heading4>
-            {
-                id ? <Heading4 className="uppercase text-xs lg:text-sm">{voice}</Heading4>: (
-                    <Combobox 
-                        title="voice"
-                        value={voice}
-                        values={voices.map((vc: any) => ({label: vc.title, value: vc.title}))}
-                        setValue={setVoice}
-                        height="h-[40vh]"
-                        
-                    />
-                )
-            }
+            <Combobox 
+                title="voice"
+                value={voice}
+                values={voices.map((vc: any) => ({label: vc.title, value: vc.title}))}
+                setValue={setVoice}
+                height="h-[40vh]"
+                
+            />
+                 
             <div className="flex gap-2 items-center">
                 <div>
                     <Heading4 className="text-sm lg:text-md my-2">Category</Heading4>

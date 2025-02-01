@@ -51,11 +51,3 @@ const ConfirmVoices = (
 };
 
 export default ConfirmVoices; 
-
-{/* <Button
-                        // variant="secondary"
-                        className="fixed bottom-0 right-0 m-5 z-40 rounded-full mb-12"
-                        size="sm"
-                    >
-                        Voices <AudioLines size={18}/>
-                    </Button> */}

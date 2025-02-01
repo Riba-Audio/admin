@@ -38,9 +38,10 @@ const Cards = () => {
         } catch (error) { }
     }
     useCustomEffect(fetchCards, [mounted]);
-    const getPercentage = (count: number, diff: number) => (
-        Math.ceil((count - diff)/count * 100)
-    )
+    const getPercentage = (count: number, diff: number) => {
+        let val =  Math.ceil((count - diff)/count * 100);
+        return Number.isNaN(val) ? val: 0
+    }
     return (
         <div className="flex gap-1 flex-wrap flex-col lg:flex-row">
             <DashboardCard 
