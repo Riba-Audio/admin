@@ -66,7 +66,7 @@ const BookForm: React.FC<BookFormProps> = (
     const fetchCategories = async () => {
         if (!mounted) return; 
         let res = await getCategories(); 
-        console.log(res.docs)
+         
         if (res)  setCategories(res.docs.map((ct: string) => ({label: ct, value: ct})))
     }
     // const fetchVoices = async () => {
