@@ -12,6 +12,11 @@ export const getSingleBook = async (bookId: string) => {
     return res?.data || false; 
 }
 
+export const checkBookByTitle = async (bookTitle: string) => {
+    let res = await getDoc(`/admin/books/check/${bookTitle}?role=admin`, true); 
+    return res?.data || false; 
+}
+
 export const getBookUnauthorized = async (bookId: string) => {
     let res = await getDoc(`/books/${bookId}?form=title`, true);
     return res?.data || false; 
