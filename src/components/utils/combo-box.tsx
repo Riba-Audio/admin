@@ -35,7 +35,7 @@ interface ComboboxProps {
 const Combobox: React.FC<ComboboxProps> = ({title, values, value, setValue, width, height}) => {
   const [open, setOpen] = React.useState(false);
   
-  const handleToLowerCase = (val: string) => val.toLowerCase(); 
+  const handleToLowerCase = (val: string) => val?.toLowerCase() || ""; 
   return (
     <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger asChild>
