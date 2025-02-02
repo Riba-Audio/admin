@@ -176,10 +176,10 @@ const BookForm: React.FC<BookFormProps> = (
                 </div>
             </div>
             {
-                id && setAmount && amount && (
+                id && setAmount && (
                     <AppInput 
                         label="Amount"
-                        value={amount}
+                        value={amount || 0}
                         type="number"
                         setValue={setAmount}
                         disabled={loading}
