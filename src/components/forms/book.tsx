@@ -4,7 +4,7 @@ import React from "react";
 import AppInput from "../common/app-input";
 import { Button } from "../ui/button";
 import CalendarPopover from "../popovers/calendar-popover";
-import { Heading4 } from "../ui/typography";
+import { Heading4, Paragraph } from "../ui/typography";
 import Combobox, { ComboType } from "../utils/combo-box";
 import { getCategories } from "@/lib/api-calls/categories";
 import { useCustomEffect } from "@/hooks/useEffect";
@@ -12,6 +12,9 @@ import useMounted from "@/hooks/useMounted";
 import { getVoices } from "@/lib/api-calls/voices";
 import { BookInfoType, VoiceType } from "@/types";
 import ConfirmVoices  from "../utils/load-voices";
+import { checkBookByTitle } from "@/lib/api-calls/books";
+import { Card } from "../ui/card";
+import { X } from "lucide-react";
 
 interface BookFormProps {
     id?: string; 
@@ -30,6 +33,11 @@ interface BookFormProps {
     loading?: boolean; 
 };
 
+type SimilarType = {
+    id: string; 
+    title: string; 
+    author: string; 
+}
 const BookForm: React.FC<BookFormProps> = (
     {
         id, title, setTitle, voice, setVoice, 
@@ -44,6 +52,8 @@ const BookForm: React.FC<BookFormProps> = (
     const [categories, setCategories] = React.useState<ComboType[]>([]);
     const [voices, setVoices] = React.useState<VoiceType[]>([]); 
 
+    const [similar, setSimilar] = React.useState<SimilarType[]>([]);
+
     const mounted = useMounted(); 
 
     React.useEffect(() => {
@@ -56,6 +66,7 @@ const BookForm: React.FC<BookFormProps> = (
     const fetchCategories = async () => {
         if (!mounted) return; 
         let res = await getCategories(); 
+         
         if (res)  setCategories(res.docs.map((ct: string) => ({label: ct, value: ct})))
     }
     // const fetchVoices = async () => {
@@ -65,6 +76,13 @@ const BookForm: React.FC<BookFormProps> = (
     // }
     useCustomEffect(fetchCategories, [mounted])
     // useCustomEffect(fetchVoices, [mounted]);
+
+    const  handleCheckTitle = async () => {
+
+        let res = await checkBookByTitle(title);
+
+        if (res) setSimilar(res);
+    }
      
     return (
         <>
@@ -73,7 +91,25 @@ const BookForm: React.FC<BookFormProps> = (
                 value={title}
                 setValue={setTitle}
                 disabled={loading}
+                onKeyUp={handleCheckTitle}
             />
+            {
+                similar.length > 0 && (
+                    <Card className="p-3 flex flex-col gap-1">
+                        <Button onClick={() => setSimilar([])} className="self-end" variant={"ghost"}>
+                            <X size={20}/>
+                        </Button>
+                        {
+                            similar.map((sim, index) => (
+                                <div key={index} className="flex items-center gap-2 w-full">
+                                    <Heading4 className="max-w-[60%] w-full text-xs lg:text-sm">{sim.title}</Heading4>
+                                    <Paragraph className="text-xs lg:text-sm">{sim.author}</Paragraph>
+                                </div>
+                            ))
+                        }
+                    </Card>
+                )
+            }
             <ConfirmVoices 
                 voices={voices}
                 setVoices={setVoices}
@@ -141,10 +177,10 @@ const BookForm: React.FC<BookFormProps> = (
                 </div>
             </div>
             {
-                id && setAmount && amount && (
+                id && setAmount && (
                     <AppInput 
                         label="Amount"
-                        value={amount}
+                        value={amount || 0}
                         type="number"
                         setValue={setAmount}
                         disabled={loading}

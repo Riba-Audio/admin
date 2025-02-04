@@ -103,21 +103,22 @@ export function ChartComponent({ height }: { height: string }) {
             <Line
               dataKey={getMonths()[0]}
               type="monotone"
-              stroke="var(--chart-1)"
+              stroke="green"
+              
               strokeWidth={2}
               dot={false}
             />
             <Line
               dataKey={getMonths()[1]}
               type="monotone"
-              stroke="var(--chart-2)"
+              stroke="blue"
               strokeWidth={2}
               dot={false}
             />
             <Line
               dataKey={getMonths()[2]}
               type="monotone"
-              stroke="var(--chart-3)"
+              stroke="yellow"
               strokeWidth={2}
               dot={false}
             />
