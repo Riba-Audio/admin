@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { Play } from "lucide-react";
+import { Play, Trash2 } from "lucide-react";
 import dayjs from "dayjs";
 
 import Container from "@/components/utils/container";
@@ -410,20 +410,31 @@ const Section = (
         }
         setSLoading(false)
     }
+
+    const deleteSection = () => {
+        let updates = sections.filter(sect => sect.title !== section.title); 
+
+        setSections([...updates]); 
+    }
     return (
         <div className="flex flex-col gap-3 p-3 border rounded-md">
             <div className="flex justify-between items-center">
                 <Badge className={cn(`${section.processed ? "bg-green-500" : "bg-gray-500"}`)}>
                     {section.processing ? "processing" : section.processed ? "processed" : "pending"}
                 </Badge>
-                <SectionSheet
-                    small={true}
-                    id={id}
-                    section={section}
-                    sections={sections}
-                    setSections={setSections}
-                    loading={loading || sLoading}
-                />
+                <div className="flex gap-2 items-center">
+                    <SectionSheet
+                        small={true}
+                        id={id}
+                        section={section}
+                        sections={sections}
+                        setSections={setSections}
+                        loading={loading || sLoading}
+                    />
+                    <Button variant="ghost" onClick={deleteSection}>
+                        <Trash2 size={20}/>
+                    </Button>
+                </div>
             </div>
             <Heading4 className="text-md lg:text-base line-clamp-1">{section.title}</Heading4>
             {
